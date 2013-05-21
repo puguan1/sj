@@ -1,0 +1,56 @@
+.container{
+       width:980px;
+       margin:0 auto;
+}
+.container .banner{
+  height:380px;
+  width:845px;
+  margin: 0 auto;
+  background: url(../img/banner.png?v=10030)  0 0px no-repeat;
+}
+.container .middle{
+  border:1px solid #d7d7d7;
+}
+.container .ad{
+  border:1px solid #d7d7d7;
+  padding: 15px 0;
+  margin:10px 0;
+}
+.container .ad .wording{
+  font-size: 18px;
+  color: #a05f01;
+  font-weight: bold;
+  margin: 0px 0 15px 12px;
+}
+.container .ad .adList{
+  text-align: center;
+}
+.container .ad .adList a{
+  background-image: url('../img/icon.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  width:118px;
+  height:66px;
+  margin: 0 6px;
+}
+.container .ad .adList .adLogo1{
+  background-position: -3px -79px;
+}
+.container .ad .adList .adLogo2{
+  background-position: -143px -79px;
+}
+.container .ad .adList .adLogo3{
+  background-position: -283px -79px;
+}
+.container .ad .adList .adLogo4{
+  background-position: -423px -79px;
+}
+.container .ad .adList .adLogo5{
+  background-position: -563px -79px;
+}
+.container .ad .adList .adLogo6{
+  background-position: -703px -79px;
+}
+.container .ad .adList .adLogo7{
+  background-position: -843px -79px;
+}

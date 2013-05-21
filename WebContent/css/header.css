@@ -1,0 +1,48 @@
+.header{
+  background: #f2f2f2;
+}
+.header .headerTopLine{
+  width:100%;
+  height:4px;
+  background: #965901;
+}
+.header .headerBottom{
+  width:100%;
+  height:80px;
+  padding: 15px 0;
+  position: relative;
+}
+.header .headerLeftLogo{
+  width:64px;
+  height: 74px;
+  background: url(../img/icon.png?v=10030)  0 0px no-repeat;
+  position: absolute;
+}
+.header .headerMenu{
+  position: absolute;
+  right:0px;
+  top:35px;
+}
+.header .headerMenu .default,.header .headerMenu .hover,.header .headerMenu .active{
+  display: inline-block;
+  line-height: 37px;
+  height:40px;
+  margin: 0 10px;
+  padding: 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color:#000;
+  text-decoration: none;
+}
+.header .headerMenu .default{
+
+}
+.header .headerMenu .default:hover{
+  background:  rgb(243, 221, 189);
+}
+.header .headerMenu .hover{
+
+}
+.header .headerMenu .active{
+  background:url(../img/icon.png?v=10030)  -73px 0px  no-repeat;
+}

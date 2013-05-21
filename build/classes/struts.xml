@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+	<package name="common" extends="json-default">
+		<interceptors>
+			<interceptor name="checkLogin" class="com.sj.admin.CheckLoginInterceptor" />
+			<interceptor name="postMethod" class="com.sj.admin.PostMethodInterceptor" />
+			<interceptor-stack name="postStack">
+				<interceptor-ref name="postMethod" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="checkLogin" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor-stack name="loginPostStack">
+				<interceptor-ref name="checkLogin" />
+				<interceptor-ref name="postStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-action-ref name="notFound" />
+		<global-results>
+			<result name="notLogin">/WEB-INF/results/notLogin.json</result>
+			<result name="serverBusy">/WEB-INF/results/serverBusy.json</result>
+			<result name="error">/WEB-INF/results/serverBusy.json</result>
+			<result name="postMethodError">/WEB-INF/results/postMethod.json</result>
+			<result name="success">/WEB-INF/results/success.json</result>
+			<result name="serverException">/500.html</result>
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="excludeNullProperties">true</param>
+				<param name="excludeProperties">actionErrors,actionMessages,errorMessages,errors,fieldErrors,locale,texts</param>
+			</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="serverException" />
+		</global-exception-mappings>
+		<action name="notFound">
+			<result>/404.html</result>
+		</action>
+	</package>
+
+	<package name="admin" namespace="/cgi-bin" extends="common">
+		<default-interceptor-ref name="loginStack" />
+		<action name="login" class="com.sj.admin.action.LoginAction">
+			<interceptor-ref name="postStack" />
+			<result name="success" type="redirect">${redirect}</result>
+			<result name="error">/WEB-INF/results/loginFailed.json</result>
+			<param name="requestDefaultUrl">/admin/index.html</param>
+		</action>
+		<action name="upload" class="com.sj.admin.action.UploadAction">
+			<interceptor-ref name="loginPostStack" />
+			<param name="requestAllowedTypes">image/jpg,image/jpeg,image/gif,image/bmp,image/png</param>
+			<param name="requestMaxSize">5242880</param>
+			<param name="requestSaveDir">images</param>
+		</action>
+	</package>
+
+	<package name="portal" namespace="/open-cgi" extends="common">
+
+	</package>
+</struts>
