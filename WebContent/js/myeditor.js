@@ -1,5 +1,5 @@
 /**
-	mail:2889887004@qq.com
+	mail:2889887004@qq.com(qqqqqq)
 	github:puguan1
 	pwd:qqqqqq1
 **/
@@ -14,7 +14,7 @@
 			locale:"cn",
 			//toolbar: "bold,italic,underline|upload",
 			toolbarExclude:"youtube,ltr,rtl,code,quote,emoticon,print,maximize,source",//要去掉的菜单
-		    style: "css/jquery.sceditor.default.css",
+		    style: "../css/jquery.sceditor.default.css",
 		    width:980,
 		    height:500
 			 });

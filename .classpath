@@ -35,8 +35,8 @@
 	<classpathentry exported="true" kind="lib" path="F:/java/shunji/WebRoot/WEB-INF/lib/json-lib-2.4-jdk15-javadoc.jar"/>
 	<classpathentry exported="true" kind="lib" path="F:/java/shunji/WebRoot/WEB-INF/lib/json-lib-2.4-jdk15-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="F:/java/shunji/WebRoot/WEB-INF/lib/mysql-connector-java-5.1.24-bin.jar"/>
-	<classpathentry kind="lib" path="D:/program/tomcat7/lib/el-api.jar"/>
-	<classpathentry kind="lib" path="D:/program/tomcat7/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="D:/program/tomcat7/lib/servlet-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/program/tomcat7/lib/el-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/program/tomcat7/lib/jsp-api.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/program/tomcat7/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
