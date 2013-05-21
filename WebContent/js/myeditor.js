@@ -23,22 +23,11 @@
 
 	};
 	var initUpload=function(){
-		var settings = {
-				uploadUrl: 'http://client.qun.qq.com/cgi-bin/feeds/upload_img',
-				uploadStart: '',
-				accept: '',
-				placeholderId: '',
-				filePostName: '',
-				uploadEnd: function() {
-					
-				},
-				postParams: {}
-		};
 
 		var uploadBotton=$(".sceditor-toolbar");
 		uploadBotton.append("<span id='uploadBotton' class='uploadBotton'></span>")
 
-		var upload = $.upload.init({uploadUrl: 'http://client.qun.qq.com/cgi-bin/feeds/upload_img',
+		var upload = $.upload.init({uploadUrl: '../cgi-bin/upload',
 			placeholderId:'uploadBotton', 
 			placeholderClass:'upload', 
 			filePostName: 'aaaaaaaa', 
@@ -53,7 +42,8 @@
 			uploadEnd: function() {
 				upload.setDisabled(false);
 				try {
-					$('textarea').sceditor('instance').insert("<img src='http://6.url.cn/zc/chs/img/ipt.png?v=10030'/>");
+					alert(this.contentWindow.data)
+					//$('textarea').sceditor('instance').insert("<img src='http://6.url.cn/zc/chs/img/ipt.png?v=10030'/>");
 				} catch(e) {
 					alert(e.message);
 				}
@@ -96,7 +86,7 @@
 		param.title=getTitle();
 		param.type=getType();
 		param.content=getContent();
-		var submitUrl="/cgi-bin/save";
+		var submitUrl="../cgi-bin/save";
 		$.post(submitUrl,param,function(data){
 				alert(data);
 		});
@@ -104,7 +94,6 @@
 	};
 	var bindEvent=function(){
 		$("#submit").bind("click",function(){submit();});
-		$("#preview").bind("click",function(){preview();});
 		//$("body").bind("click",function(){$('textarea').sceditor('instance').insert("fuck")});
 	};
 	initEditor();
