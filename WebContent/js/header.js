@@ -32,6 +32,7 @@
 				menuItem.className=menuStyle["default"];
 			}
 			menuItem.setAttribute("href","javascript:void(0);");
+			menuItem.setAttribute("id","topMenu_"+i);
 			domHeaderMenu.appendChild(menuItem);
 		}
 		domHeaderBottom.appendChild(domHeaderleftLogo);
