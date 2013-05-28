@@ -1,100 +1,21 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-	<listener>
-		<listener-class>com.sj.admin.Context</listener-class>
-	</listener>
-	<filter>
-		<filter-name>characterEncoding</filter-name>
-		<filter-class>com.sj.admin.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>htmlCache</filter-name>
-		<filter-class>com.sj.admin.CacheFilter</filter-class>
-		<init-param>
-			<param-name>maxAge</param-name>
-			<param-value>86400</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>imgCache</filter-name>
-		<filter-class>com.sj.admin.CacheFilter</filter-class>
-		<init-param>
-			<param-name>maxAge</param-name>
-			<param-value>8640000</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>struts</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-	</filter>
 
-	<filter>
-		<filter-name>admin</filter-name>
-		<filter-class>com.sj.admin.LoginValidator</filter-class>
-		<init-param>
-			<param-name>loginPage</param-name>
-			<param-value>/login.html</param-value>
-		</init-param>
-		<init-param>
-			<param-name>indexPage</param-name>
-			<param-value>/admin/index.html</param-value>
-		</init-param>
-	</filter>
+  <servlet>
+    <description>获取资源列表</description>
+    <display-name>getSourceList</display-name>
+    <servlet-name>getSourceList</servlet-name>
+    <servlet-class>com.sj.oidb.getSourceList</servlet-class>
+  </servlet>
 
-	<filter-mapping>
-		<filter-name>characterEncoding</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+  <servlet-mapping>
+    <servlet-name>getSourceList</servlet-name>
+    <url-pattern>/cgi-bin/getSourceList</url-pattern>
+  </servlet-mapping>
 
-	<filter-mapping>
-		<filter-name>htmlCache</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
 
-	<filter-mapping>
-		<filter-name>imgCache</filter-name>
-		<url-pattern>/images/</url-pattern>
-	</filter-mapping>
 
-	<filter-mapping>
-		<filter-name>struts</filter-name>
-		<url-pattern>/cgi-bin/*</url-pattern>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>struts</filter-name>
-		<url-pattern>/open-cgi/*</url-pattern>
-	</filter-mapping>
-
-	<filter-mapping>
-		<filter-name>admin</filter-name>
-		<url-pattern>/admin/*</url-pattern>
-	</filter-mapping>
-
-	<error-page>
-		<error-code>404</error-code>
-		<location>/404.html</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/500.html</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/500.html</location>
-	</error-page>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
 </web-app>
