@@ -2,7 +2,6 @@ package com.sj.oidb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -12,21 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-
-public class getSourceList extends HttpServlet {
-
+public class getSourceInfo extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public getSourceList() {
+	public getSourceInfo() {
 		super();
 	}
 
 	/**
 	 * Destruction of the servlet. <br>
 	 */
-	@Override
 	public void destroy() {
 		super.destroy(); // Just puts "destroy" string in log
 		// Put your code here
@@ -42,9 +38,9 @@ public class getSourceList extends HttpServlet {
 	 * @throws ServletException if an error occurred
 	 * @throws IOException if an error occurred
 	 */
-	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		RequestParams rp=new RequestParams();	
 		Map<String,String> requestParams=rp.getRequestParams(request.getParameterMap());
 		NewsService ns=new NewsService();
@@ -53,15 +49,10 @@ public class getSourceList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONObject jo=new JSONObject();
 		jo.put("ec", "0");
-		jo.put("ls", ns.getNewsByParams(requestParams));
+		jo.put("info", ns.getNewsById((String)requestParams.get("id")));
 		out.print(jo);
 		out.flush();
 		out.close();
-	}
-
-	private void getRequestParams(Map<String, String[]> parameterMap) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -74,10 +65,9 @@ public class getSourceList extends HttpServlet {
 	 * @throws ServletException if an error occurred
 	 * @throws IOException if an error occurred
 	 */
-	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
@@ -92,14 +82,12 @@ public class getSourceList extends HttpServlet {
 		out.flush();
 		out.close();
 	}
-	
 
 	/**
 	 * Initialization of the servlet. <br>
 	 *
 	 * @throws ServletException if an error occurs
 	 */
-	@Override
 	public void init() throws ServletException {
 		// Put your code here
 	}

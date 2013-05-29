@@ -45,14 +45,14 @@ public final class Util {
 		}
 
 		if (size < SIZE_HEX * SIZE_HEX) {
-			return df.format(((double) size) / SIZE_HEX) + "K";
+			return df.format((size) / SIZE_HEX) + "K";
 		}
 
 		if (size < SIZE_HEX * SIZE_HEX * SIZE_HEX) {
-			return df.format(((double) size) / (SIZE_HEX * SIZE_HEX)) + "M";
+			return df.format((size) / (SIZE_HEX * SIZE_HEX)) + "M";
 		}
 
-		return df.format(((double) size) / (SIZE_HEX * SIZE_HEX * SIZE_HEX))
+		return df.format((size) / (SIZE_HEX * SIZE_HEX * SIZE_HEX))
 				+ "G";
 	}
 

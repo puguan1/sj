@@ -1,8 +1,14 @@
 package com.sj.oidb;
 
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -20,10 +26,22 @@ public class NewsService {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		NewsService nd=new NewsService();
-		News news=new News();
-		news.setId(12221);
-		news.setContent("hello xx");
-		nd.addNews(news);
+		for(int i=0;i<10;i++){
+			News news=new News();
+			news.setContent("hello xx"+i);
+			news.setType(i+"");
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String time = df.format(new Date());
+			Timestamp ts = Timestamp.valueOf(time);
+			news.setTime(ts);
+			nd.addNews(news);
+		}
+
+	}
+	public String generateId(){
+		String id="";
+		id=new Date().getTime()+"";
+		return id;
 	}
 	/**
 	 * 
@@ -37,6 +55,7 @@ public class NewsService {
 		try{
 			NewsDAO nd=new NewsDAO();
 			tx=session.beginTransaction();
+			news.setId(generateId());
 			nd.save(news);
 			tx.commit();	
 		}catch(Exception e){
@@ -50,6 +69,31 @@ public class NewsService {
 	public List<News> getNews(){
 		NewsDAO nd=new NewsDAO();
 		return nd.findAll();
+	}
+	public News getNewsById(String id){
+		NewsDAO nd=new NewsDAO();
+		News result=new News();
+		try{
+			result=nd.findById(id);
+		}catch(Exception e){
+			
+		}finally{
+			return result;
+		}
+		
+	}
+	public List<News> getNewsByParams(Map p){
+		String type=(String) p.get("type");
+		if(type.equalsIgnoreCase("")){
+			type="0";//默认为0
+		}
+		List<News> result=new ArrayList<News>();
+		Session session=HibernateSessionFactory.getSession();
+		String hql="from News n where n.type="+type+"";
+		Query q=session.createQuery(hql);
+		result=q.list();
+		return result;
+		
 	}
 
 }

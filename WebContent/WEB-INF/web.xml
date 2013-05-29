@@ -10,10 +10,21 @@
     <servlet-name>getSourceList</servlet-name>
     <servlet-class>com.sj.oidb.getSourceList</servlet-class>
   </servlet>
+  <servlet>
+    <description>获取资源详情</description>
+    <display-name>getSourceInfo</display-name>
+    <servlet-name>getSourceInfo</servlet-name>
+    <servlet-class>com.sj.oidb.getSourceInfo</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>getSourceList</servlet-name>
     <url-pattern>/cgi-bin/getSourceList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>getSourceInfo</servlet-name>
+    <url-pattern>/cgi-bin/getSourceInfo</url-pattern>
   </servlet-mapping>
 
 

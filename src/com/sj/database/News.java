@@ -10,12 +10,12 @@ import javax.persistence.Table;
  * News entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "news", catalog = "shunji")
+@Table(name = "news", catalog = "sj")
 public class News implements java.io.Serializable {
 
 	// Fields
 
-	private Integer id;
+	private String id;
 	private String title;
 	private String content;
 	private Timestamp time;
@@ -39,12 +39,12 @@ public class News implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public News(Integer id) {
+	public News(String id) {
 		this.id = id;
 	}
 
 	/** full constructor */
-	public News(Integer id, String title, String content, Timestamp time,
+	public News(String id, String title, String content, Timestamp time,
 			String type, Integer pv, String writer,String logo) {
 		this.id = id;
 		this.title = title;
@@ -59,11 +59,11 @@ public class News implements java.io.Serializable {
 	// Property accessors
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public String getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

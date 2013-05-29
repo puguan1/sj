@@ -1,6 +1,5 @@
 package com.sj.database;
 
-import java.sql.Timestamp;
 import java.util.List;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
@@ -50,7 +49,7 @@ public class NewsDAO extends BaseHibernateDAO {
 		}
 	}
 
-	public News findById(java.lang.Integer id) {
+	public News findById(java.lang.String id) {
 		log.debug("getting News instance with id: " + id);
 		try {
 			News instance = (News) getSession().get("com.sj.database.News", id);
@@ -64,7 +63,7 @@ public class NewsDAO extends BaseHibernateDAO {
 	public List<News> findByExample(News instance) {
 		log.debug("finding News instance by example");
 		try {
-			List<News> results = (List<News>) getSession()
+			List<News> results = getSession()
 					.createCriteria("com.sj.database.News")
 					.add(create(instance)).list();
 			log.debug("find by example successful, result size: "

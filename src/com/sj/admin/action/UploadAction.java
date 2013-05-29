@@ -31,6 +31,7 @@ public class UploadAction extends JsonActionSupport {
 
 	private String imgId;
 
+	@Override
 	public String execute() throws Exception {
 		init();
 		if (file == null || file.length() < 1 || file.length() > requestMaxSize) {
