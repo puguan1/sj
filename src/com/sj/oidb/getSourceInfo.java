@@ -49,7 +49,7 @@ public class getSourceInfo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONObject jo=new JSONObject();
 		jo.put("ec", "0");
-		jo.put("info", ns.getNewsById((String)requestParams.get("id")));
+		jo.put("info", ns.getNewsById(requestParams.get("id")));
 		out.print(jo);
 		out.flush();
 		out.close();

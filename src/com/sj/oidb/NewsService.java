@@ -30,10 +30,9 @@ public class NewsService {
 			News news=new News();
 			news.setContent("hello xx"+i);
 			news.setType(i+"");
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			String time = df.format(new Date());
-			Timestamp ts = Timestamp.valueOf(time);
-			news.setTime(ts);
+			news.setTime(time);
 			nd.addNews(news);
 		}
 
@@ -84,12 +83,21 @@ public class NewsService {
 	}
 	public List<News> getNewsByParams(Map p){
 		String type=(String) p.get("type");
-		if(type.equalsIgnoreCase("")){
+		String []typeArray;
+		if(type==null||type.equalsIgnoreCase("")){
 			type="0";//默认为0
 		}
+		typeArray=type.split("-");
 		List<News> result=new ArrayList<News>();
 		Session session=HibernateSessionFactory.getSession();
-		String hql="from News n where n.type="+type+"";
+		String hql="from News n where ";
+		for(int i=0;i<typeArray.length;i++){
+			if(i==0){
+				hql+=" n.type="+typeArray[i];
+			}else{
+				hql+=" or n.type="+typeArray[i];
+			}
+		}
 		Query q=session.createQuery(hql);
 		result=q.list();
 		return result;

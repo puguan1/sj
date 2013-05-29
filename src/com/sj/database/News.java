@@ -18,7 +18,7 @@ public class News implements java.io.Serializable {
 	private String id;
 	private String title;
 	private String content;
-	private Timestamp time;
+	private String time;
 	private String type;
 	private Integer pv;
 	private String writer;
@@ -44,7 +44,7 @@ public class News implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public News(String id, String title, String content, Timestamp time,
+	public News(String id, String title, String content, String time,
 			String type, Integer pv, String writer,String logo) {
 		this.id = id;
 		this.title = title;
@@ -86,11 +86,11 @@ public class News implements java.io.Serializable {
 	}
 
 	@Column(name = "time", length = 19)
-	public Timestamp getTime() {
+	public String getTime() {
 		return this.time;
 	}
 
-	public void setTime(Timestamp time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
