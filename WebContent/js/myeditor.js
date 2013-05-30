@@ -52,13 +52,16 @@
 		});
 	};
 	var getTitle=function(){
-		return $("[id=title]").get(0).value;
+		return encodeURIComponent($("[id=title]").get(0).value);
 	};
 	var getType=function(){
 		return $("[id=type]").get(0).value;
 	};
 	var getContent=function(){
-		return $('textarea').sceditor('instance').val();
+		return encodeURIComponent($('textarea').sceditor('instance').val());
+	};
+	var getLogo=function(){
+		return "";
 	};
 	var preview=function(){
 		var form=document.createElement("form");
@@ -86,10 +89,11 @@
 		param.title=getTitle();
 		param.type=getType();
 		param.content=getContent();
-		var submitUrl="../cgi-bin/save";
+		param.logo=getLogo();
+		var submitUrl="../cgi-bin/addSource";
 		$.post(submitUrl,param,function(data){
-				alert(data);
-		});
+				alert(data.ec);
+		},"json");
 		
 	};
 	var bindEvent=function(){

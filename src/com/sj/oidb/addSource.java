@@ -77,7 +77,7 @@ public class addSource extends HttpServlet {
 		n.setType(bodyParams.get("type"));
 		ns.addNews(n);
 		JSONObject jo=new JSONObject();
-		jo.put("ec", "0");
+		jo.put("ec", 0);
 		out.println(jo);
 		out.flush();
 		out.close();
