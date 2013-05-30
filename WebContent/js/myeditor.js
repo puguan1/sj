@@ -92,7 +92,11 @@
 		param.logo=getLogo();
 		var submitUrl="../cgi-bin/addSource";
 		$.post(submitUrl,param,function(data){
-				alert(data.ec);
+				if(data&&data.ec==0){
+					alert("数据添加成功");
+				}else{
+					alert("数据添加失败");
+				}
 		},"json");
 		
 	};
