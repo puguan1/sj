@@ -16,6 +16,13 @@
     <servlet-name>getSourceInfo</servlet-name>
     <servlet-class>com.sj.oidb.getSourceInfo</servlet-class>
   </servlet>
+  <servlet>
+    <description>添加资源</description>
+    <display-name>addSource</display-name>
+    <servlet-name>addSource</servlet-name>
+    <servlet-class>com.sj.oidb.addSource</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -25,6 +32,10 @@
   <servlet-mapping>
     <servlet-name>getSourceInfo</servlet-name>
     <url-pattern>/cgi-bin/getSourceInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>addSource</servlet-name>
+    <url-pattern>/cgi-bin/addSource</url-pattern>
   </servlet-mapping>
 
 

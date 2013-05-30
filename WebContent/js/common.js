@@ -36,6 +36,43 @@
 				return _isIE;
 			};
 		}(),
+		tmpl : function () {
+			var cache = {},
+			rNotAlpha = /\W/,
+			rwhitespace = /[\r\t\n]/g,
+			rquot = /((^|%>)[^\t]*)'/g;
+			var rsquot = /'/g,
+			rvalue = /\t=(.*?)%>/g,
+			SPACE = " ",
+			START = "<%",
+			END = "%>";
+			var TAB = "\t",
+			VALUE = "',$1,'",
+			PUSH_END = "');",
+			PUSH_START = "p.push('",
+			CR = "\r",
+			QUOT = "\\'";
+			function fquot($0) {
+				return $0.replace(rsquot, '\r');
+			}
+			return function (str, data) {
+				var fn = !rNotAlpha.test(str) ?
+					cache[str] = cache[str] ||
+					$$.tmpl(document.getElementById(str).innerHTML) :
+					new Function("obj",
+						"var p=[],print=function(){p.push.apply(p,arguments);};" +
+						"with(obj){p.push('" +
+						str.replace(rwhitespace, SPACE)
+						.split(START).join(TAB)
+						.replace(rquot, fquot)
+						.replace(rvalue, VALUE)
+						.split(TAB).join(PUSH_END)
+						.split(END).join(PUSH_START)
+						.split(CR).join(QUOT)
+						 + "');}return p.join('');");
+				return data ? fn(data) : fn;
+			};
+		}(),
 		/**
 		 * 统一任务管理
 		 */
