@@ -30,9 +30,6 @@ public class NewsService {
 			News news=new News();
 			news.setContent("hello xx"+i);
 			news.setType(i+"");
-			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			String time = df.format(new Date());
-			news.setTime(time);
 			nd.addNews(news);
 		}
 
@@ -55,6 +52,10 @@ public class NewsService {
 			NewsDAO nd=new NewsDAO();
 			tx=session.beginTransaction();
 			news.setId(generateId());
+			news.setPv(0);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			String time = df.format(new Date());
+			news.setTime(time);
 			nd.save(news);
 			tx.commit();	
 		}catch(Exception e){
