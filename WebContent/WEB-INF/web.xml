@@ -22,6 +22,20 @@
     <servlet-name>addSource</servlet-name>
     <servlet-class>com.sj.oidb.addSource</servlet-class>
   </servlet>
+  <servlet>
+    <description>修改资源</description>
+    <display-name>modSource</display-name>
+    <servlet-name>modSource</servlet-name>
+    <servlet-class>com.sj.oidb.modSource</servlet-class>
+  </servlet>
+  <servlet>
+    <description>删除资源</description>
+    <display-name>delSource</display-name>
+    <servlet-name>delSource</servlet-name>
+    <servlet-class>com.sj.oidb.delSource</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -36,6 +50,14 @@
   <servlet-mapping>
     <servlet-name>addSource</servlet-name>
     <url-pattern>/cgi-bin/addSource</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>modSource</servlet-name>
+    <url-pattern>/cgi-bin/modSource</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>delSource</servlet-name>
+    <url-pattern>/cgi-bin/delSource</url-pattern>
   </servlet-mapping>
 
 

@@ -1,6 +1,7 @@
 package com.sj.oidb;
 
 
+import java.lang.reflect.Method;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -57,6 +58,66 @@ public class NewsService {
 			String time = df.format(new Date());
 			news.setTime(time);
 			nd.save(news);
+			tx.commit();	
+		}catch(Exception e){
+			result=false;
+		}finally{
+			session.close();
+		}
+		return result;
+	}
+	public boolean modNews(Map m){
+		boolean result=true;
+		Transaction tx=null; 
+		Session session=HibernateSessionFactory.getSession();
+		try{
+			NewsDAO nd=new NewsDAO();
+			tx=session.beginTransaction();
+			String id=(String)m.get("id");
+			News news=nd.findById(id);
+			if(news==null){
+				return false;
+			}
+			for(Object key  : m.keySet()){
+				if(key.toString().equalsIgnoreCase("id")){
+					continue;
+				}
+				String value=(String)m.get(key);
+				String aa = "set" + key.toString().substring(0, 1).toUpperCase()
+			                + key.toString().substring(1, key.toString().length());
+			    Class<News> classType = News.class;
+			    Method method = classType.getMethod(aa,String.class);
+			    method.invoke(news, value);
+				
+			}
+			nd.merge(news);
+			tx.commit();	
+		}catch(Exception e){
+			result=false;
+		}finally{
+			session.close();
+		}
+		return result;
+	}
+	/**
+	 * 批量删除资源
+	 * @param ids
+	 * @return
+	 */
+	public boolean delNews(String ids){
+		boolean result=true;
+		Transaction tx=null; 
+		Session session=HibernateSessionFactory.getSession();
+		try{
+			NewsDAO nd=new NewsDAO();
+			tx=session.beginTransaction();
+			String []idArray=ids.split("-");
+			for(int i=0;i<idArray.length;i++){
+				News news=nd.findById(idArray[i]);
+				if(news!=null){
+					nd.delete(news);
+				}
+			}
 			tx.commit();	
 		}catch(Exception e){
 			result=false;
