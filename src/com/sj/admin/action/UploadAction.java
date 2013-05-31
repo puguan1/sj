@@ -34,6 +34,7 @@ public class UploadAction extends JsonActionSupport {
 	@Override
 	public String execute() throws Exception {
 		init();
+		System.out.println("大小："+file.length());
 		if (file == null || file.length() < 1 || file.length() > requestMaxSize) {
 			this.setEc(101);
 			this.setMsg("文件大小不能为空或超过" + maxSize);
@@ -96,6 +97,9 @@ public class UploadAction extends JsonActionSupport {
 					: requestSaveDir;
 			dir = new File(Context.getLocalContextPath() + this.requestSaveDir);
 			dir.mkdirs();
+			System.out.println("Context路径："+Context.getLocalContextPath());
+			System.out.println("this.requestSaveDir路径："+this.requestSaveDir);
+			System.out.println("路径："+dir.getAbsolutePath());
 		}
 	}
 

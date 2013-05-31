@@ -30,11 +30,10 @@
 		var upload = $.upload.init({uploadUrl: '../cgi-bin/upload',
 			placeholderId:'uploadBotton', 
 			placeholderClass:'upload', 
-			filePostName: 'aaaaaaaa', 
+			filePostName: 'file', 
 			disabled: false,
 			postParams: {
-			   'dsssssss': '999999999999999999',
-				m: 1
+			   'requestAllowedTypes': '1'
 			},
 			uploadStart: function(file) {
 				upload.setDisabled(true);
@@ -42,8 +41,18 @@
 			uploadEnd: function() {
 				upload.setDisabled(false);
 				try {
-					alert(this.contentWindow.data)
-					//$('textarea').sceditor('instance').insert("<img src='http://6.url.cn/zc/chs/img/ipt.png?v=10030'/>");
+					var result=this.contentWindow.document.body.innerHTML;
+					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
+					var ec=result[1];
+					var imgId=result[2];
+					switch(ec){
+						case "0":
+							$('textarea').sceditor('instance').insert("<img src='/images/"+imgId+"' />");
+							break;
+						default:
+							alert("图片上传失败")
+					}
+					
 				} catch(e) {
 					alert(e.message);
 				}
