@@ -99,7 +99,7 @@
 		param.type=getType();
 		param.content=getContent();
 		param.logo=getLogo();
-		var submitUrl="../cgi-bin/addSource";
+		var submitUrl="../cgi-servelet/addSource";
 		$.post(submitUrl,param,function(data){
 				if(data&&data.ec==0){
 					alert("数据添加成功");
