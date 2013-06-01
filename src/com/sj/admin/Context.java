@@ -4,6 +4,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.struts2.ServletActionContext;
+
 public class Context implements ServletContextListener {
 
 	private static String CONTEXT_PATH;

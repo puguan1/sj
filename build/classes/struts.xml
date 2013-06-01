@@ -56,7 +56,7 @@
 			<interceptor-ref name="loginPostStack" />
 			<param name="requestAllowedTypes">image/jpg,image/jpeg,image/gif,image/bmp,image/png</param>
 			<param name="requestMaxSize">5242880</param>
-			<param name="requestSaveDir">images</param>
+			<param name="requestSaveDir">uploadImages</param>
 		</action>
 	</package>
 

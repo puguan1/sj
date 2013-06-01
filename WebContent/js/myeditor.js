@@ -22,6 +22,7 @@
 		initUpload();
 
 	};
+	var newsLogo="";
 	var initUpload=function(){
 
 		var uploadBotton=$(".sceditor-toolbar");
@@ -47,7 +48,40 @@
 					var imgId=result[2];
 					switch(ec){
 						case "0":
-							$('textarea').sceditor('instance').insert("<img src='/images/"+imgId+"' />");
+							$('textarea').sceditor('instance').insert("<img src='/sj/uploadImages/"+imgId+"' />");
+							break;
+						default:
+							alert("图片上传失败")
+					}
+					
+				} catch(e) {
+					alert(e.message);
+				}
+			},
+			title: 'upload'
+		});
+		var uploadLogo = $.upload.init({uploadUrl: '../cgi-bin/upload',
+			placeholderId:'uploudLogo', 
+			placeholderClass:'upload', 
+			filePostName: 'file', 
+			disabled: false,
+			postParams: {
+			   'requestAllowedTypes': '1'
+			},
+			uploadStart: function(file) {
+				upload.setDisabled(true);
+			},
+			uploadEnd: function() {
+				upload.setDisabled(false);
+				try {
+					var result=this.contentWindow.document.body.innerHTML;
+					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
+					var ec=result[1];
+					var imgId=result[2];
+					switch(ec){
+						case "0":
+							newsLogo='/sj/uploadImages/'+imgId;
+							$("#showLogo").html("<img src='/sj/uploadImages/"+imgId+"' />")
 							break;
 						default:
 							alert("图片上传失败")
@@ -70,7 +104,7 @@
 		return encodeURIComponent($('textarea').sceditor('instance').val());
 	};
 	var getLogo=function(){
-		return "";
+		return newsLogo;
 	};
 	var preview=function(){
 		var form=document.createElement("form");

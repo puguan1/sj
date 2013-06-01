@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.security.MessageDigest;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.sj.admin.Context;
 import com.sj.util.Util;
 
@@ -34,7 +36,6 @@ public class UploadAction extends JsonActionSupport {
 	@Override
 	public String execute() throws Exception {
 		init();
-		System.out.println("大小："+file.length());
 		if (file == null || file.length() < 1 || file.length() > requestMaxSize) {
 			this.setEc(101);
 			this.setMsg("文件大小不能为空或超过" + maxSize);
@@ -51,10 +52,10 @@ public class UploadAction extends JsonActionSupport {
 		FileInputStream fis = new FileInputStream(file);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		int len;
-		while ((len = fis.read(BUFFER)) != -1) {
+/*		while ((len = fis.read(BUFFER)) != -1) {
 			md.update(BUFFER, 0, len);
 		}
-		fis.close();
+		fis.close();*/
 		this.imgId = Util.byteToHexString(md.digest())
 				+ Util.getFileSuffix(fileFileName);
 		File destFile = new File(dir + "/" + this.imgId);
@@ -95,10 +96,8 @@ public class UploadAction extends JsonActionSupport {
 		if (this.requestSaveDir == null) {
 			this.requestSaveDir = requestSaveDir == null ? DEFAULT_IMAGE_DIR
 					: requestSaveDir;
-			dir = new File(Context.getLocalContextPath() + this.requestSaveDir);
+			dir = new File(ServletActionContext.getRequest().getRealPath("/") + this.requestSaveDir);
 			dir.mkdirs();
-			System.out.println("Context路径："+Context.getLocalContextPath());
-			System.out.println("this.requestSaveDir路径："+this.requestSaveDir);
 			System.out.println("路径："+dir.getAbsolutePath());
 		}
 	}
