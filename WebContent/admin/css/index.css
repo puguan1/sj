@@ -20,20 +20,26 @@ a.selected { cursor: default; }
 .header{ background: #f2f2f2; border-top: 4px solid #965801; height: 100px; position: relative; }
 .logo { position: absolute; top: 16px; left: 20px; width: 62px; height: 72px; background: url(../../img/logo.png)  0 0px no-repeat; }
 /** content css **/
-.content { width: 978px; height: 620px; border: 1px solid #d6d6d6; position: relative; }
-.left { height: 570px; overflow: auto; position: absolute; left: 10px; top: 10px; width: 200px;  border-top: 1px solid #965801; font-size: 16px;}
-.left .directoryMenu{line-height: 30px; text-indent: 28px; color: #a05f03; border-bottom: 1px solid #d6d6d6; cursor: pointer;}
-.left .leafMenu{ font-size: 14px; line-height: 24px; text-indent: 35px; color: #858585; }
+.content { width: 978px; height: 650px;  position: relative; }
+.left { height: 570px; overflow: auto; position: absolute; left: 10px; top: 10px; width: 200px;  border-top: 1px solid #965801; }
+.left .directoryMenu{ font-size: 18px;line-height: 50px; text-indent: 28px; color: #a05f01; border-bottom: 1px solid #d6d6d6; cursor: pointer;}
+.left .leafMenu{ font-size: 14px; line-height: 24px; text-indent: 35px; color: #666666; }
 .left .selected{color: #a05f03;}
-.left .unselected{color: #858585;}
+.left .unselected{color: #666666;}
 
 .right{
-	width:700px;position: absolute;right:10px;
+	width:700px;
+	height:650px;
+	border: 1px solid  #d6d6d6;
+	position: absolute;
+	right:10px;
+
 }
 .right .dataTable1{
 	width:700px;
 	 border: solid 1px #B4B4B4;  
-    border-collapse: collapse;     --折叠样式.  
+    border-collapse: collapse;  
+    table-layout: fixed
 }
 .right .dataTable1 .tableHead{
 	font-weight: bold;
@@ -45,4 +51,45 @@ a.selected { cursor: default; }
 	text-align: center;
 	vertical-align: middle;
 	border: 1px solid #d6d6d6;
+	overflow: hidden;
+}
+.editor{
+
+}
+.editor .uploadBotton{
+	width:26px;
+	height:26px;
+	background: none repeat scroll 0 0 padding-box #DDDDDD;
+    border-bottom: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+   	display: inline-block;
+   	margin: 1px 5px 1px 0;
+    padding: 1px;
+	}
+.editor .uploadLogo{
+	width:50px;
+	height:20px;
+	background: none repeat scroll 0 0 padding-box #DDDDDD;
+    border-bottom: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+   	display: inline-block;
+   	margin: 1px 5px 1px 0;
+    padding: 1px;
+	}
+.editor .showLogo{
+	width:250px;
+	height:20px;
+	background: none repeat scroll 0 0 padding-box #DDDDDD;
+    border-bottom: 1px solid #AAAAAA;
+    border-radius: 3px 3px 3px 3px;
+   	display: inline-block;
+   	margin: 1px 5px 1px 0;
+    padding: 1px;
+	}
+.editor .showLogo img{
+	width:250px;
+	height:20px;
+	}
+.editor .bottonArea{
+	margin:10px 0;
 }

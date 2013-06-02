@@ -53,6 +53,11 @@ public class getSourceList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONObject jo=new JSONObject();
 		jo.put("ec", "0");
+		
+		jo.put("total", ns.getNewsByParamsCount(requestParams));
+		jo.put("pageNow", requestParams.get("pageNow"));
+		jo.put("pageSize", requestParams.get("pageSize"));
+		
 		jo.put("ls", ns.getNewsByParams(requestParams));
 		out.print(jo);
 		out.flush();

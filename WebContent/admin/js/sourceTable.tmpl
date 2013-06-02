@@ -1,20 +1,24 @@
-			<table>
-				<th>
+		<script type="application/x-template" id="tmpl1">
+			<div class="dataTitle"><%= n["typeName"] %>列表</div>
+			<div class="dataAdd">添加<%= n["typeName"] %></div>
+			<table class="dataTable1">
+				<tr class="tableHead">
 					<td>序号</td>
 					<td>标题</td>
 					<td>时间</td>
 					<td>内容</td>
 					<td>图片</td>
 					<td>操作</td>
-				</th>
-			<%var ls=data.ls; for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
+				</tr>
+			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
 			   	<tr>
-					<td><% =i %></td>
-					<td><% =n["title"] %></td>
-					<td><% =n["time"] %></td>
-					<td><% =n["content"] %></td>
-					<td><% =n["logo"] %></td>
-					<td>操作</td>
+					<td style="width:50px"><%= i %></td>
+					<td style="width:150px"><%= n["title"] %></td>
+					<td style="width:50px"><%= n["time"] %></td>
+					<td style="width:200px"><%= n["content"] %></td>
+					<td style="width:150px"><img src=<%= n["logo"] %>></td>
+					<td style="width:100px" id=<%= n["id"] %>><a href="javascript:void(0);">编辑</a><a href="javascript:void(0);">删除</a></td>
 				</tr>
 			<% } %>
 			</table>
+		</script>

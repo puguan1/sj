@@ -120,6 +120,7 @@ public class NewsService {
 			}
 			tx.commit();	
 		}catch(Exception e){
+			System.out.println(e);
 			result=false;
 		}finally{
 			session.close();
@@ -143,8 +144,15 @@ public class NewsService {
 		}
 		
 	}
+	/**
+	 * 支持分页查询
+	 * @param p
+	 * @return
+	 */
 	public List<News> getNewsByParams(Map p){
-		String type=(String) p.get("type");
+		String type=(String) p.get("type");//数据分类
+		String pageSize=(String) p.get("pageSize");//数据每页的数量
+		String pageNow=(String) p.get("pageNow");//第几页数据
 		String []typeArray;
 		if(type==null||type.equalsIgnoreCase("")){
 			type="0";//默认为0
@@ -152,17 +160,68 @@ public class NewsService {
 		typeArray=type.split("-");
 		List<News> result=new ArrayList<News>();
 		Session session=HibernateSessionFactory.getSession();
-		String hql="from News n where ";
-		for(int i=0;i<typeArray.length;i++){
-			if(i==0){
-				hql+=" n.type="+typeArray[i];
-			}else{
-				hql+=" or n.type="+typeArray[i];
+		Transaction tx=null; 
+		try{
+			tx=session.beginTransaction();
+			String hql="from News n where ";
+			for(int i=0;i<typeArray.length;i++){
+				if(i==0){
+					hql+=" n.type="+typeArray[i];
+				}else{
+					hql+=" or n.type="+typeArray[i];
+				}
 			}
+			Query q;
+			if(pageSize!=null&&pageNow!=null){//分页查询
+				int first=(Integer.valueOf(pageNow)-1)*Integer.valueOf(pageSize);
+				q=session.createQuery(hql).setFirstResult(first).setMaxResults(Integer.valueOf(pageSize));
+			}else{
+				q=session.createQuery(hql);
+			}
+			
+			result=q.list();
+		}catch(Exception e){
+			
+		}finally{
+			session.close();
 		}
-		Query q=session.createQuery(hql);
-		result=q.list();
 		return result;
+		
+	}
+	/**
+	 * 支持分页查询 总数
+	 * @param p
+	 * @return
+	 */
+	public int getNewsByParamsCount(Map p){
+		String type=(String) p.get("type");//数据分类
+		String []typeArray;
+		if(type==null||type.equalsIgnoreCase("")){
+			type="0";//默认为0
+		}
+		typeArray=type.split("-");
+		List<News> result=new ArrayList<News>();
+		Session session=HibernateSessionFactory.getSession();
+		Transaction tx=null; 
+		try{
+			tx=session.beginTransaction();
+			String hql="from News n where ";
+			for(int i=0;i<typeArray.length;i++){
+				if(i==0){
+					hql+=" n.type="+typeArray[i];
+				}else{
+					hql+=" or n.type="+typeArray[i];
+				}
+			}
+			Query q=session.createQuery(hql);
+			result=q.list();
+		}catch(Exception e){
+			
+		}finally{
+			session.close();
+		}
+
+		return result.size();
 		
 	}
 
