@@ -1,0 +1,20 @@
+			<table>
+				<th>
+					<td>序号</td>
+					<td>标题</td>
+					<td>时间</td>
+					<td>内容</td>
+					<td>图片</td>
+					<td>操作</td>
+				</th>
+			<%var ls=data.ls; for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
+			   	<tr>
+					<td><% =i %></td>
+					<td><% =n["title"] %></td>
+					<td><% =n["time"] %></td>
+					<td><% =n["content"] %></td>
+					<td><% =n["logo"] %></td>
+					<td>操作</td>
+				</tr>
+			<% } %>
+			</table>

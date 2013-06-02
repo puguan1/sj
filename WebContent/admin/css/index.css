@@ -1,0 +1,48 @@
+
+/** reset css **/
+* { margin: 0; padding: 0; font-size: 100%; font: inherit; vertical-align: baseline; }
+html, body { width: 100%; height: 100%; overflow: auto; }
+body, input, textarea, select { line-height: 1; font: 14px "微软雅黑" , "宋体"; background-color: #fff; }
+ol, ul, li { list-style: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+a, input, div[contenteditable=true], select, textarea { outline: none; }
+a:link, a:active, a:visited { text-decoration: none; }
+a:hover { text-decoration: underline; }
+a.selected { cursor: default; }
+
+/** container css **/
+.container { width: 980px; margin: 0 auto; }
+.ellipsis { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; word-wrap: normal; }
+.wd_break { word-wrap: break-word; word-break: break-all; white-space: normal; }
+.bold { font-weight: bold; }
+
+/** header css **/
+.header{ background: #f2f2f2; border-top: 4px solid #965801; height: 100px; position: relative; }
+.logo { position: absolute; top: 16px; left: 20px; width: 62px; height: 72px; background: url(../../img/logo.png)  0 0px no-repeat; }
+/** content css **/
+.content { width: 978px; height: 620px; border: 1px solid #d6d6d6; position: relative; }
+.left { height: 570px; overflow: auto; position: absolute; left: 10px; top: 10px; width: 200px;  border-top: 1px solid #965801; font-size: 16px;}
+.left .directoryMenu{line-height: 30px; text-indent: 28px; color: #a05f03; border-bottom: 1px solid #d6d6d6; cursor: pointer;}
+.left .leafMenu{ font-size: 14px; line-height: 24px; text-indent: 35px; color: #858585; }
+.left .selected{color: #a05f03;}
+.left .unselected{color: #858585;}
+
+.right{
+	width:700px;position: absolute;right:10px;
+}
+.right .dataTable1{
+	width:700px;
+	 border: solid 1px #B4B4B4;  
+    border-collapse: collapse;     --折叠样式.  
+}
+.right .dataTable1 .tableHead{
+	font-weight: bold;
+}
+.right .dataTable1 tr{
+	border: 1px solid #d6d6d6;
+}
+.right .dataTable1 td{
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid #d6d6d6;
+}
