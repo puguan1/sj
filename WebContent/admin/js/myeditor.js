@@ -13,9 +13,9 @@
 			plugins: "bbcode",
 			locale:"cn",
 			//toolbar: "bold,italic,underline|upload",
-			toolbarExclude:"youtube,ltr,rtl,code,quote,emoticon,print,maximize,source",//要去掉的菜单
+			toolbarExclude:"youtube,ltr,rtl,code,quote,emoticon,print,maximize,source,date,time,horizontalrule",//要去掉的菜单
 		    style: "css/jquery.sceditor.default.css",
-		    width:680,
+		    width:780,
 		    height:400
 			 });
 		//$('textarea').sceditor('instance').val('');
@@ -81,7 +81,7 @@
 					switch(ec){
 						case "0":
 							newsLogo='/sj/uploadImages/'+imgId;
-							$("#showLogo").html("<img src='/sj/uploadImages/"+imgId+"' />")
+							$("#logo").val(newsLogo);
 							break;
 						default:
 							alert("图片上传失败")
@@ -97,14 +97,23 @@
 	var getTitle=function(){
 		return encodeURIComponent($("[id=title]").get(0).value);
 	};
+	var setTitle=function(title){
+		$("#title").get(0).value=title;
+	};
 	var getType=function(){
 		return $.addSourceType||"1";
 	};
 	var getContent=function(){
 		return encodeURIComponent($('textarea').sceditor('instance').val());
 	};
+	var setContent=function(content){
+		$('textarea').sceditor('instance').val(content);
+	};
 	var getLogo=function(){
 		return newsLogo;
+	};
+	var setLogo=function(logo){
+
 	};
 
 	var submit=function(){
@@ -129,5 +138,17 @@
 	};
 	initEditor();
 	bindEvent();
+
+	var editor=function(){
+		return{
+			setTitle:setTitle,
+			setLogo:setLogo,
+			setContent:setContent,
+			getTitle:getTitle,
+			getLogo:getLogo,
+			getContent:getContent
+		}
+	}();
+	$.editor=editor;
 })($);
 

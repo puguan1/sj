@@ -19,25 +19,27 @@
 				<div id="right" class="right">
 
 					<div id="showData"></div>
+					<div style="clear:both"></div>
 					<div class="editor">
-					<div>
-						<label for="title">标题:</label>
-						<input type="text" id="title"/>
-						
+						<div>
+							<label for="title">标题:</label>
+							<input type="text" id="title"/>
+							
+						</div>
+						<div>
+							<label for="title">图片:</label>
+							<input type="text" id="logo"/>
+							<span class="uploadLogo" id="uploudLogo"></span>
+							
+						</div>
+						<div>
+							<textarea id="editor"> </textarea>
+						</div>
+						<div class="bottonArea">
+							<input value="提交" type="button" id="submit" />
+							<input value="取消" type="button" id="close" />
+						</div>
 					</div>
-					<div>
-						<label for="title">缩略图:</label>
-						<span class="uploadLogo" id="uploudLogo"></span>
-						<span class="showLogo" id="showLogo"></span>
-					</div>
-					<div>
-						<textarea id="editor"> </textarea>
-					</div>
-					<div class="bottonArea">
-						<input value="提交" type="button" id="submit" />
-						<input value="取消" type="button" id="close" />
-					</div>
-				</div>
 			</div>
 
 			<div class="bottom" id="bottom"></div>
@@ -58,11 +60,11 @@
 				</tr>
 			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
 			   	<tr>
-					<td style="width:50px"><%= i %></td>
+					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
 					<td style="width:150px"><%= n["title"] %></td>
 					<td style="width:50px"><%= n["time"] %></td>
-					<td style="width:150px"><img src=<%= decodeURIComponent(n["logo"]) %>></td>
-					<td style="width:100px" ><a href="javascript:void(0);">编辑</a><a href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
+					<td style="width:150px"><img class="news_logo" src=<%= decodeURIComponent(n["logo"]) %>></td>
+					<td style="width:100px" ><a href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
 				</tr>
 			<% } %>
 			</table>
