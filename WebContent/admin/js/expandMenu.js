@@ -2,6 +2,7 @@
 (function($){
 	var menuIdPrefix="_menu_";
 	var menuParent;
+	var lastClick=null;//上次点击的节点
 	var menuData=[
 		{"id":"1","pid":"","name":"公司介绍","type":"1"}
 
@@ -105,10 +106,14 @@
 			menuParent.click(function(e){
 				//叶子节点
 				if($(e.target).attr("isLeaf")=="1"){
+					if(lastClick){
+						lastClick.attr("class","leafMenu unselected")
+					}
+					lastClick=$(e.target);
 					$(e.target).siblings().attr("class","leafMenu unselected")
 					$(e.target).attr("class","leafMenu selected")
 					var type=$(e.target).attr("type");
-					if(type){
+					if(type!=""){
 						$.getData(type);
 						$.addSourceType=type;//外面使用
 					}

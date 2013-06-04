@@ -19,7 +19,7 @@
 				<div id="right" class="right">
 
 					<div id="showData"></div>
-					<div style="clear:both"></div>
+					<div style="clear:both;height:20px;"></div>
 					<div class="editor">
 						<div>
 							<label for="title">标题:</label>
@@ -49,6 +49,7 @@
 	</div>
 		<script type="application/x-template" id="tmpl1">
 			<div class="dataTitle"><%= typeName %>列表</div>
+			<div class="line"></div>
 			<div class="dataAdd"><a href="javascript:void(0);" onclick="$.showAddEditor(<%= type %>)">添加<%= typeName %></a></div>
 			<table class="dataTable1">
 				<tr class="tableHead">
@@ -64,7 +65,7 @@
 					<td style="width:150px"><%= n["title"] %></td>
 					<td style="width:50px"><%= n["time"] %></td>
 					<td style="width:150px"><img class="news_logo" src=<%= decodeURIComponent(n["logo"]) %>></td>
-					<td style="width:100px" ><a href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
+					<td style="width:100px" ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
 				</tr>
 			<% } %>
 			</table>

@@ -14,6 +14,7 @@
 			locale:"cn",
 			//toolbar: "bold,italic,underline|upload",
 			toolbarExclude:"youtube,ltr,rtl,code,quote,emoticon,print,maximize,source,date,time,horizontalrule",//要去掉的菜单
+			skipLastLineBreak:true,
 		    style: "css/jquery.sceditor.default.css",
 		    width:780,
 		    height:400
@@ -48,7 +49,7 @@
 					var imgId=result[2];
 					switch(ec){
 						case "0":
-							$('textarea').sceditor('instance').insert("<img src='/sj/uploadImages/"+imgId+"' />");
+							$('textarea').sceditor('instance').insert("<img style='maxWidth:600px;maxHeight:500px;' src='/sj/uploadImages/"+imgId+"' />");
 							break;
 						default:
 							alert("图片上传失败")
@@ -95,7 +96,7 @@
 		});
 	};
 	var getTitle=function(){
-		return encodeURIComponent($("[id=title]").get(0).value);
+		return $("[id=title]").get(0).value;
 	};
 	var setTitle=function(title){
 		$("#title").get(0).value=title;
@@ -104,7 +105,7 @@
 		return $.addSourceType||"1";
 	};
 	var getContent=function(){
-		return encodeURIComponent($('textarea').sceditor('instance').val());
+		return $('textarea').sceditor('instance').val();
 	};
 	var setContent=function(content){
 		$('textarea').sceditor('instance').val(content);
@@ -122,14 +123,12 @@
 		param.type=getType();
 		param.content=getContent();
 		param.logo=getLogo();
-		var submitUrl="../cgi-servelet/addSource";
-		$.post(submitUrl,param,function(data){
-				if(data&&data.ec==0){
-					alert("数据添加成功");
-				}else{
-					alert("数据添加失败");
-				}
-		},"json");
+		if($.getEditorType()=="add"){
+			$.addData(param);
+		}else{
+			$.modData(param);
+		}
+		
 		
 	};
 	var bindEvent=function(){

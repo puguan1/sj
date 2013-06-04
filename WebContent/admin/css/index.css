@@ -21,7 +21,7 @@ a.selected { cursor: default; }
 .logo { position: absolute; top: 16px; left: 20px; width: 62px; height: 72px; background: url(../../img/logo.png)  0 0px no-repeat; }
 /** content css **/
 .content { width: 978px; height: 650px;  position: relative; }
-.left { min-height: 650px; overflow: auto; position: absolute; left: 10px; top: 10px; width: 150px;  border-top: 1px solid #965801; }
+.left { min-height: 650px; overflow: auto; position: absolute; left: 10px; top: 10px; width: 150px;  border-top: 2px solid #965801; }
 .left .directoryMenu{ font-size: 18px;line-height: 50px; text-indent: 28px; color: #a05f01; border-bottom: 1px solid #d6d6d6; cursor: pointer;}
 .left .leafMenu{ font-size: 14px; line-height: 24px; text-indent: 35px; color: #666666; }
 .left .selected{color: #a05f03;}
@@ -101,9 +101,54 @@ a.selected { cursor: default; }
 	height:50px;
 	margin-top: 3px;
 }
+.page{
+	margin-top: 15px;
+
+}
 .pageLeft{
 	float: left;
 }
 .pageRight{
 	float:right;
+}
+.pageRight a{
+	color: #333;
+}
+.right .dataTitle{
+	font-size: 16px;
+	color:  #965801;
+	line-height: 34px;
+	border-bottom: 2px solid #965801; 
+	text-align: center;
+	display: inline-block;
+	padding: 0 10px;
+}
+.right .dataAdd{
+	font-size: 16px;
+	color:  #965801;
+	line-height: 34px;
+	border: 1px solid #ccc; 
+	text-align: center;
+	display: inline-block;
+	padding: 0 10px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.right .dataAdd a{
+	color:  #965801;
+}
+.line{
+	border-top: 2px solid #ccc;
+	position: relative;
+	top:-2px;
+	z-index: -1;
+}
+.number{
+	color: #c00;
+}
+.mod_button{
+	color: #965801;
+}
+.del_button{
+	color:  #c00;
 }
