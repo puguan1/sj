@@ -9,6 +9,7 @@
 	var lastParams={};//上次拉去数据的参数，操作数据后重新拉
 	var editorType="add";
 	var modId="";//修改记录的id
+	var defaultType="2";//默认的type
 	var getDataFromCacheById=function(id){
 		var data=dataCache.ls;
 		for(var i=0,l=data.length;i<l;i++){
@@ -99,7 +100,8 @@
 	var getEditorType=function(){
 		return editorType;
 	};
-	getData(2);
+	getData(defaultType);
+	$.addSourceType=defaultType;
 	$.getData=getData;
 	$.delData=delData;
 	$.addData=addData;

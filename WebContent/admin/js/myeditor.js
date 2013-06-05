@@ -76,7 +76,7 @@
 				upload.setDisabled(false);
 				try {
 					var result=this.contentWindow.document.body.innerHTML;
-					result=result.match(/{\"ec\":(\d),\"imgId|msg\":\"([\w .]+)\"}/);
+					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
 					var ec=result[1];
 					var imgId=result[2];
 					switch(ec){
