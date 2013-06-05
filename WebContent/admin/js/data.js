@@ -94,6 +94,7 @@
 			$.editor.setContent("");
 			editorType="add";
 		}
+		$("#title").focus();
 	};
 	var getEditorType=function(){
 		return editorType;

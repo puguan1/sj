@@ -49,7 +49,7 @@
 					var imgId=result[2];
 					switch(ec){
 						case "0":
-							$('textarea').sceditor('instance').insert("<img style='maxWidth:600px;maxHeight:500px;' src='/sj/uploadImages/"+imgId+"' />");
+							$('textarea').sceditor('instance').insert("<img style='max-width:600px;max-height:500px;' src='/sj/uploadImages/"+imgId+"' />");
 							break;
 						default:
 							alert("图片上传失败")
@@ -76,7 +76,7 @@
 				upload.setDisabled(false);
 				try {
 					var result=this.contentWindow.document.body.innerHTML;
-					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
+					result=result.match(/{\"ec\":(\d),\"imgId|msg\":\"([\w .]+)\"}/);
 					var ec=result[1];
 					var imgId=result[2];
 					switch(ec){
