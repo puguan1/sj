@@ -24,7 +24,6 @@ a.selected { cursor: default; }
 .left { 
    min-height: 650px;
    overflow: auto; 
-  _position: absolute;
   left: 10px; 
   top: 10px; 
   width: 150px;  
@@ -40,7 +39,6 @@ a.selected { cursor: default; }
 	width:780px;
 	min-height:650px;
 	border: 1px solid  #d6d6d6;
-	_position: absolute;
 	left:175px;
 	padding: 10px;
 	float:right;
