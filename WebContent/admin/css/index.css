@@ -21,7 +21,16 @@ a.selected { cursor: default; }
 .logo { position: absolute; top: 16px; left: 20px; width: 62px; height: 72px; background: url(../../img/logo.png)  0 0px no-repeat; }
 /** content css **/
 .content { width: 978px; height: 650px;  position: relative; }
-.left { min-height: 650px; overflow: auto; position: absolute; left: 10px; top: 10px; width: 150px;  border-top: 2px solid #965801; }
+.left { 
+   min-height: 650px;
+   overflow: auto; 
+  _position: absolute;
+  left: 10px; 
+  top: 10px; 
+  width: 150px;  
+  border-top: 2px solid #965801; 
+  float: left;
+}
 .left .directoryMenu{ font-size: 18px;line-height: 50px; text-indent: 28px; color: #a05f01; border-bottom: 1px solid #d6d6d6; cursor: pointer;}
 .left .leafMenu{ font-size: 14px; line-height: 24px; text-indent: 35px; color: #666666; }
 .left .selected{color: #a05f03;}
@@ -31,9 +40,10 @@ a.selected { cursor: default; }
 	width:780px;
 	min-height:650px;
 	border: 1px solid  #d6d6d6;
-	position: absolute;
+	_position: absolute;
 	left:175px;
 	padding: 10px;
+	float:right;
 
 }
 .right .dataTable1{
@@ -177,4 +187,10 @@ a.selected { cursor: default; }
 }
 .button:hover{
 	background: rgb(71, 66, 66);
+}
+.footer{
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+	margin-bottom: 10px;
 }
