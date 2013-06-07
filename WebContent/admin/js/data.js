@@ -37,6 +37,7 @@
 		param.type=type;
 		param.pageNow=pageNow||1;
 		param.pageSize=pageSize||defaultPageSize;
+		param.t=Math.random();
 		lastParams=param;
 		$.get(getSourceCgi,param,function(data){
 			if(data&&data.ec==0){
