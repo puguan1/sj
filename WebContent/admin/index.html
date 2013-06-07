@@ -22,17 +22,18 @@
 					<div style="clear:both;height:20px;"></div>
 					<div class="editor">
 						<div class="input">
-							<label for="title">标题:</label>
+							<label for="title">标题：</label>
 							<input class="titleInput" type="text" id="title"/>
 							
 						</div>
-						<div class="input">
-							<label for="title">图片:</label>
+						<div id="uploadLogo" class="input">
+							<label id="resource" for="title">图片：</label>
 							<input  class="logoInput" type="text" id="logo"/>
 							<span class="uploadLogo" id="uploudLogo"></span>
 							
 						</div>
-						<div>
+
+						<div id="editor_wrap">
 							<textarea id="editor"> </textarea>
 						</div>
 						<div class="bottonArea">
@@ -64,7 +65,45 @@
 					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
 					<td style="width:150px"><%= n["title"] %></td>
 					<td style="width:50px"><%= n["time"] %></td>
-					<td style="width:150px"><img class="news_logo" src=<%= decodeURIComponent(n["logo"]) %>></td>
+					<td style="width:150px"><img class="news_logo"  src=<%= decodeURIComponent(n["logo"]) %>></td>
+					<td style="width:100px" ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
+				</tr>
+			<% } %>
+			</table>
+			<div class="page">
+				<div class="pageLeft">
+					<span>共有<label class="number"><%= total %></label>条</span>
+					<span>每页<label class="number"><%= pageSize %></label>条</span>
+					<span>共有<label class="number"><%=Math.ceil(total/pageSize)  %></label>页</span>
+					<span>本页是第<label class="number"><%= pageNow %></label>页</span>
+				</div>
+				<div class="pageRight">
+					<a href="javascript:void(0);"  onclick="$.getData(<%= type %>,1)">第一页</a>
+					<a  href="javascript:void(0);" onclick="$.getData(<%= type %>,<%= pageNow-1 %>)">上一页</a>
+					<a  href="javascript:void(0);" onclick="$.getData(<%= type %>,<%= pageNow>=Math.ceil(total/pageSize)?pageNow:(pageNow-0+1) %>)">下一页</a>
+					<a  href="javascript:void(0);" onclick="$.getData(<%= type %>,<%= Math.ceil(total/pageSize) %>)">最后一页</a>
+				</div>
+			</div>
+			<div style="clear:both;height:20px;"></div>
+			<div class="dataTitle">添加<%= typeName %></div>
+			<div class="line"></div>
+		</script>
+		<script type="application/x-template" id="tmpl2">
+			<div class="dataTitle"><%= typeName %>列表</div>
+			<div class="line"></div>
+			<div class="dataAdd"><a href="javascript:void(0);" onclick="$.showAddEditor(<%= type %>)">新增<%= typeName %></a><span class="addIcon"></span></div>
+			<table class="dataTable1">
+				<tr class="tableHead">
+					<td>序号</td>
+					<td>表格文件</td>
+					<td>时间</td>
+					<td>操作</td>
+				</tr>
+			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
+			   	<tr>
+					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
+					<td style="width:150px"><a class="biaoge" target="_blank" href="<%= decodeURIComponent(n["logo"]) %>"><%= n["title"] %></a></td>
+					<td style="width:50px"><%= n["time"] %></td>
 					<td style="width:100px" ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
 				</tr>
 			<% } %>
@@ -91,7 +130,7 @@
 		<script src="../js/common.js" type="text/javascript" ></script>
 		<script src="../js/jquery.sceditor.js" type="text/javascript"></script>
 		<script src="../js/languages/cn.js" type="text/javascript"></script>
-		<script src="../js/upload.js" type="text/javascript"></script>
+		<script src="js/upload.js" type="text/javascript"></script>
 		
 		<script src="js/myeditor.js" type="text/javascript" ></script>
 		<script src="js/expandMenu.js" type="text/javascript" ></script>

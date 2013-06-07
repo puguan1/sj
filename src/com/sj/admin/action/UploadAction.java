@@ -41,13 +41,14 @@ public class UploadAction extends JsonActionSupport {
 			this.setMsg("文件大小不能为空或超过" + maxSize);
 			return Util.JSON;
 		}
-		if (fileFileName == null
+/*		if (fileFileName == null
 				|| fileContentType == null
 				|| requestAllowedTypes.indexOf(fileContentType.toLowerCase()) == -1) {
+			System.out.println("类型："+fileContentType);
 			this.setEc(102);
 			this.setMsg("文件类型不正确。");
 			return Util.JSON;
-		}
+		}*/
 
 		FileInputStream fis = new FileInputStream(file);
 		MessageDigest md = MessageDigest.getInstance("MD5");

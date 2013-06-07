@@ -21,6 +21,14 @@
 	};
 	var showData=function(data){
 		var t = template('tmpl1');
+		if(data.type=="12"){
+			 t = template('tmpl2');
+			 $("#editor_wrap").hide();
+			 $("#resource").html("表格：");
+		}else{
+			 $("#editor_wrap").show();
+			 $("#resource").html("图片：");
+		}
 		$("#showData").html(t(data));
 		//console.log(t(data));
 	};

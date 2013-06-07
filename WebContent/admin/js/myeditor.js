@@ -23,6 +23,14 @@
 		initUpload();
 
 	};
+	var inArray=function(array,item){
+		for(var i=0,l=array.length;i<l;i++){
+			if(array[i].toLowerCase()==item.toLowerCase()){
+				return true;
+			}
+		}
+		return false;
+	};
 	var newsLogo="";
 	var initUpload=function(){
 
@@ -70,6 +78,15 @@
 			   'requestAllowedTypes': '1'
 			},
 			uploadStart: function(file) {
+				var fileType=file.substr(file.lastIndexOf(".")+1);
+				var types=["jpg","jpeg","gif","bmp","png"]
+				if(getType()=="12"){
+					types=["xls","doc"]
+				}
+				if(!inArray(types,fileType)){
+					alert("文件格式有误,请选择正确的图片格式，支持"+types.join(","));
+					return false;
+				}
 				upload.setDisabled(true);
 			},
 			uploadEnd: function() {
@@ -94,7 +111,47 @@
 			},
 			title: 'upload'
 		});
+	/*var uploadFile = $.upload.init({uploadUrl: '../cgi-bin/upload',
+			placeholderId:'uploudFile', 
+			placeholderClass:'upload', 
+			filePostName: 'file', 
+			disabled: false,
+			postParams: {
+			   'requestAllowedTypes': '1'
+			},
+			uploadStart: function(file) {
+				var fileType=file.substr(file.lastIndexOf(".")+1);
+				var types=["xls"]
+				if(!inArray(types,fileType)){
+					alert("文件格式有误,请选择正确的表格格式,支持xls");
+					return false;
+				}
+				upload.setDisabled(true);
+			},
+			uploadEnd: function() {
+				upload.setDisabled(false);
+				try {
+					var result=this.contentWindow.document.body.innerHTML;
+					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
+					var ec=result[1];
+					var imgId=result[2];
+					switch(ec){
+						case "0":
+							newsLogo='/sj/uploadImages/'+imgId;
+							$("#logo").val(newsLogo);
+							break;
+						default:
+							alert("文件上传失败")
+					}
+					
+				} catch(e) {
+					alert(e.message);
+				}
+			},
+			title: 'upload'
+		});*/
 	};
+	
 	var getTitle=function(){
 		return $("[id=title]").get(0).value;
 	};
