@@ -37,7 +37,7 @@ a.selected { cursor: default; }
 
 .right{
 	width:780px;
-	min-height:650px;
+	11min-height:650px;
 	border: 1px solid  #d6d6d6;
 	left:175px;
 	padding: 10px;
@@ -65,17 +65,18 @@ a.selected { cursor: default; }
 	text-overflow:ellipsis;
 }
 .editor{
-
 }
 .editor .uploadBotton{
 	width:26px;
 	height:26px;
 	background: none repeat scroll 0 0 padding-box #DDDDDD;
+	+background: #DDDDDD;
     border-bottom: 1px solid #AAAAAA;
     border-radius: 3px 3px 3px 3px;
    	display: inline-block;
    	margin: 1px 5px 1px 0;
     padding: 1px;
+    font-size: 14px;
 	}
 .editor .uploadLogo{
 	width:50px;
@@ -147,6 +148,7 @@ a.selected { cursor: default; }
 	display: inline-block;
 	width: 16px;
 	height:14px;
+	+height: 18px;
 	background: url(../img/icon.png) -121px -10px no-repeat;
 }
 .line{

@@ -42,16 +42,17 @@
 						</div>
 					</div>
 			</div>
-
+			<div style="clear:both;height:20px;"></div>
+			<div class="footer" id="footer">© Copyright: 2009-2013 All rights reserved. 鄂ICP备11067463号</div>
+			<div style="clear:both;height:20px;"></div>
 		</div>
-		<div style="clear:both;height:20px;"></div>
-		<div class="footer" id="footer">© Copyright: 2009-2013 All rights reserved. 鄂ICP备11067463号</div>
+		
 
 	</div>
 		<script type="application/x-template" id="tmpl1">
-			<div class="dataTitle"><%= typeName %>列表</div>
+			<span class="dataTitle"><%= typeName %>列表</span>
 			<div class="line"></div>
-			<div class="dataAdd"><a href="javascript:void(0);" onclick="$.showAddEditor(<%= type %>)">新增<%= typeName %></a><span class="addIcon"></span></div>
+			<span class="dataAdd"><a href="javascript:void(0);" onclick="$.showAddEditor(<%= type %>)">新增<%= typeName %></a><span class="addIcon"></span></span>
 			<table class="dataTable1">
 				<tr class="tableHead">
 					<td>序号</td>
@@ -85,7 +86,7 @@
 				</div>
 			</div>
 			<div style="clear:both;height:20px;"></div>
-			<div class="dataTitle">添加<%= typeName %></div>
+			<span class="dataTitle">添加<%= typeName %></span>
 			<div class="line"></div>
 		</script>
 		<script type="application/x-template" id="tmpl2">
