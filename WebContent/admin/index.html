@@ -21,7 +21,7 @@
 					<div id="showData"></div>
 					<div style="clear:both;height:20px;"></div>
 					<div class="editor">
-						<div class="input">
+						<div class="input" id="title_wrap">
 							<label for="title">标题：</label>
 							<input class="titleInput" type="text" id="title"/>
 							
@@ -64,7 +64,7 @@
 			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
 			   	<tr>
 					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
-					<td style="width:150px"><%= n["title"] %></td>
+					<td style="width:150px"><%= decodeURIComponent(n["title"]) %></td>
 					<td style="width:50px"><%= n["time"] %></td>
 					<td style="width:150px"><img class="news_logo"  src=<%= decodeURIComponent(n["logo"]) %>></td>
 					<td style="width:100px" ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
@@ -103,9 +103,9 @@
 			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
 			   	<tr>
 					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
-					<td style="width:150px"><a class="biaoge" target="_blank" href="<%= decodeURIComponent(n["logo"]) %>"><%= n["title"] %></a></td>
+					<td style="width:150px"><a class="biaoge" target="_blank" href="<%= decodeURIComponent(n["logo"]) %>"><%= decodeURIComponent(n["title"]) %></a></td>
 					<td style="width:50px"><%= n["time"] %></td>
-					<td style="width:100px" ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
+					<td style="width:100px" ><a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
 				</tr>
 			<% } %>
 			</table>

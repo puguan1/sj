@@ -55,6 +55,7 @@
 					result=result.match(/{\"ec\":(\d)+,\"(imgId|msg)\":\"([\w\W]+)\"}/);
 					if(!result){
 						alert("图片上传失败");
+						return;
 					}
 					var ec=result[1];
 					var imgId=result[3];
@@ -67,7 +68,7 @@
 					}
 					
 				} catch(e) {
-					alert(e.message);
+					//alert(e.message);
 				}
 			},
 			title: 'upload'
@@ -82,9 +83,11 @@
 			},
 			uploadStart: function(file) {
 				var fileType=file.substr(file.lastIndexOf(".")+1);
+				var fileName=file.substr(file.lastIndexOf("\\")+1);
 				var types=["jpg","jpeg","gif","bmp","png"]
 				if(getType()=="12"){
 					types=["xls","doc"]
+					setTitle(fileName);
 				}
 				if(!inArray(types,fileType)){
 					alert("文件格式有误,请选择正确的图片格式，支持"+types.join(","));
@@ -101,6 +104,7 @@
 					result=result.match(/{\"ec\":(\d)+,\"(imgId|msg)\":\"([\w\W]+)\"}/);
 					if(!result){
 						alert("图片上传失败");
+						return;
 					}
 					var ec=result[1];
 					var imgId=result[3];
@@ -114,7 +118,7 @@
 					}
 					
 				} catch(e) {
-					alert(e.message);
+					//alert(e.message);
 				}
 			},
 			title: 'upload'
@@ -153,7 +157,7 @@
 					}
 					
 				} catch(e) {
-					alert(e.message);
+					//alert(e.message);
 				}
 			},
 			title: 'upload'
