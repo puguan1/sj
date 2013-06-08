@@ -111,7 +111,7 @@
 					switch(ec+""){
 						case "0":
 							newsLogo='/sj/uploadImages/'+imgId;
-							$("#logo").val(newsLogo);
+							setLogo(newsLogo);
 							break;
 						default:
 							alert(result[3]||"图片上传失败");
@@ -123,52 +123,14 @@
 			},
 			title: 'upload'
 		});
-	/*var uploadFile = $.upload.init({uploadUrl: '../cgi-bin/upload',
-			placeholderId:'uploudFile', 
-			placeholderClass:'upload', 
-			filePostName: 'file', 
-			disabled: false,
-			postParams: {
-			   'requestAllowedTypes': '1'
-			},
-			uploadStart: function(file) {
-				var fileType=file.substr(file.lastIndexOf(".")+1);
-				var types=["xls"]
-				if(!inArray(types,fileType)){
-					alert("文件格式有误,请选择正确的表格格式,支持xls");
-					return false;
-				}
-				upload.setDisabled(true);
-			},
-			uploadEnd: function() {
-				upload.setDisabled(false);
-				try {
-					var result=this.contentWindow.document.body.innerHTML;
-					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
-					var ec=result[1];
-					var imgId=result[2];
-					switch(ec){
-						case "0":
-							newsLogo='/sj/uploadImages/'+imgId;
-							$("#logo").val(newsLogo);
-							break;
-						default:
-							alert("文件上传失败")
-					}
-					
-				} catch(e) {
-					//alert(e.message);
-				}
-			},
-			title: 'upload'
-		});*/
+	
 	};
 	
 	var getTitle=function(){
-		return $("[id=title]").get(0).value;
+		return $("[id=title]").val();
 	};
 	var setTitle=function(title){
-		$("#title").get(0).value=title;
+		$("#title").val(title);
 	};
 	var getType=function(){
 		return $.addSourceType||"1";
@@ -180,10 +142,15 @@
 		$('textarea').sceditor('instance').val(content);
 	};
 	var getLogo=function(){
-		return newsLogo;
+		return $("#logo").val();
 	};
 	var setLogo=function(logo){
-
+		$("#logo").val(logo);
+	};
+	var clear=function(){
+		setTitle("");
+		setLogo("");
+		setContent("");
 	};
 
 	var submit=function(){
@@ -214,7 +181,8 @@
 			setContent:setContent,
 			getTitle:getTitle,
 			getLogo:getLogo,
-			getContent:getContent
+			getContent:getContent,
+			clear:clear
 		}
 	}();
 	$.editor=editor;

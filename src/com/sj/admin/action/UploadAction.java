@@ -1,9 +1,14 @@
 package com.sj.admin.action;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.MessageDigest;
+import java.util.Date;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -32,7 +37,36 @@ public class UploadAction extends JsonActionSupport {
 	private String fileContentType;
 
 	private String imgId;
-
+	
+	private static final int BUFFER_SIZE = 16 * 1024 ;
+	/**
+	 * 拷贝文件
+	 * @param src
+	 * @param dst
+	 */
+	private static void copy(File src, File dst) {
+         try {
+            InputStream in = null ;
+            OutputStream out = null ;
+             try {                
+                in = new BufferedInputStream( new FileInputStream(src), BUFFER_SIZE);
+                out = new BufferedOutputStream( new FileOutputStream(dst), BUFFER_SIZE);
+                 byte [] buffer = new byte [BUFFER_SIZE];
+                 while (in.read(buffer) > 0 ) {
+                    out.write(buffer);
+                } 
+            } finally {
+                 if ( null != in) {
+                    in.close();
+                } 
+                 if ( null != out) {
+                    out.close();
+                } 
+            } 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+    } 
 	@Override
 	public String execute() throws Exception {
 		init();
@@ -53,21 +87,23 @@ public class UploadAction extends JsonActionSupport {
 		FileInputStream fis = new FileInputStream(file);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		int len;
-/*		while ((len = fis.read(BUFFER)) != -1) {
+		while ((len = fis.read(BUFFER)) != -1) {
 			md.update(BUFFER, 0, len);
 		}
-		fis.close();*/
-		this.imgId = Util.byteToHexString(md.digest())
-				+ Util.getFileSuffix(fileFileName);
+		fis.close();
+		/*this.imgId = Util.byteToHexString(md.digest())
+				+ Util.getFileSuffix(fileFileName);*/
+		this.imgId=new Date().getTime()+Util.getFileSuffix(fileFileName);
 		File destFile = new File(dir + "/" + this.imgId);
-		if (!destFile.exists()) {
+		/*if (!destFile.exists()) {
 			FileOutputStream fos = new FileOutputStream(destFile);
 			while ((len = fis.read(BUFFER)) != -1) {
 				fos.write(BUFFER, 0, len);
 			}
 			fos.close();
 			fis.close();
-		}
+		}*/
+		copy(file,destFile);
 		return Util.JSON;
 	}
 
@@ -99,7 +135,7 @@ public class UploadAction extends JsonActionSupport {
 					: requestSaveDir;
 			dir = new File(ServletActionContext.getRequest().getRealPath("/") + this.requestSaveDir);
 			dir.mkdirs();
-			System.out.println("路径："+dir.getAbsolutePath());
+			//System.out.println("路径："+dir.getAbsolutePath());
 		}
 	}
 

@@ -54,6 +54,8 @@
 	};
 	var refresh=function(){
 		getData(lastParams.type,lastParams.pageNow,lastParams.pageSize);
+		$.resetEditorType();
+		$.editor.clear();
 	};
 	/**
 	** 删除数据
@@ -98,11 +100,13 @@
 			var title=data.title;
 			var logo=data.logo;
 			var content=data.content;
-			$.editor.setTitle(title);
+			$.editor.setTitle(decodeURIComponent(title));
+			$.editor.setLogo(decodeURIComponent(logo));
 			$.editor.setContent(decodeURIComponent(content));
 			editorType="mod";
 		}else{
 			$.editor.setTitle("");
+			$.editor.setLogo("");
 			$.editor.setContent("");
 			editorType="add";
 		}
@@ -111,6 +115,9 @@
 	var getEditorType=function(){
 		return editorType;
 	};
+	var resetEditorType=function(){
+		editorType="add";
+	};
 	getData(defaultType);
 	$.addSourceType=defaultType;
 	$.getData=getData;
@@ -118,5 +125,6 @@
 	$.addData=addData;
 	$.modData=modData;
 	$.getEditorType=getEditorType;
+	$.resetEditorType=resetEditorType;
 	$.showAddEditor=showAddEditor;
 })($)
