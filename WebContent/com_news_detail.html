@@ -30,8 +30,8 @@
 					<div class="left_nav">
 						<div class="left_nav_section" id="navSection">行业动态 / News</div>
 						<ul class="left_nav_opt" id="navOpt">
-							<li><a href="com_news.html">企业新闻</a></li>
-							<li><a class="selected" href="indus_news.html">最新行业动态</a></li>
+							<li><a class="selected" href="com_news.html">企业新闻</a></li>
+							<li><a href="indus_news.html">最新行业动态</a></li>
 							<li><a href="policy.html">政策法规</a></li>
 						</ul>
 					</div>
@@ -49,7 +49,7 @@
 				<div class="position" id="position">
 					<p class="column pos_column" id="column">行业动态</p>
 					<div class="pos_detail">
-						<a href="index.html" class="fst_section" id="fstSection">首页</a> > <a href="com_news.html" class="scnd_section" id="scndSection">行业动态</a> > <a href="indus_news.html" class="thrd_section" id="thrdSection">最新行业动态</a>
+						<a href="index.html" class="fst_section" id="fstSection">首页</a> > <a href="com_news.html" class="scnd_section" id="scndSection">行业动态</a> > <a href="com_news.html" class="thrd_section" id="thrdSection">企业新闻</a>
 					</div>
 				</div>
 				<div class="detail" id="detail">
@@ -87,7 +87,7 @@
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript">
 		var id = parseInt($.query('id')), pid, nid;
-		var idlist = $.cookie.get('indus_news');
+		var idlist = $.cookie.get('com_news');
 		idlist = idlist.split('-');
 		var index = Array.prototype.indexOf.call(idlist, id + '');
 		if (index > -1) {
@@ -121,7 +121,7 @@
 				var info = data.info;
 				$('#prevNews').html('上一篇：' + info.title).attr('nid', info.id).show();
 				$('#prevNews').click(function () {
-					window.location.href = "indus_news_detail.html?id=" + $(this).attr('nid')
+					window.location.href = "com_news_detail.html?id=" + $(this).attr('nid')
 				});
 			}
 		});
@@ -132,7 +132,7 @@
 				var info = data.info;
 				$('#nextNews').html('下一篇：' + info.title).attr('nid', info.id).show();
 				$('#nextNews').click(function () {
-					window.location.href = "indus_news_detail.html?id=" + $(this).attr('nid')
+					window.location.href = "com_news_detail.html?id=" + $(this).attr('nid')
 				});
 			}
 		});

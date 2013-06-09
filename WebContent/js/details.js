@@ -8,7 +8,7 @@
 	})($);
 (function($){
 	
-	var detailsUrl="/cgi-bin/details";
+	var detailsUrl="/cgi-servelet/details";
 	var getDetails=function(id){
 		$.get(detailsUrl,{"id":id},function(data){
 			$("#details").attr("innerHTML",data.content);

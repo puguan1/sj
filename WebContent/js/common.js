@@ -58,7 +58,7 @@
 			return function (str, data) {
 				var fn = !rNotAlpha.test(str) ?
 					cache[str] = cache[str] ||
-					$$.tmpl(document.getElementById(str).innerHTML) :
+					$.tmpl(document.getElementById(str).innerHTML) :
 					new Function("obj",
 						"var p=[],print=function(){p.push.apply(p,arguments);};" +
 						"with(obj){p.push('" +
@@ -137,282 +137,286 @@
 			 };
 		}(),
 		html: function () {
-			   var rdecodeEntity = /&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g;
-			   var rencodeEntity = /['<> "&]/g;
-			   var decodeEntities = {
-			     '&quot;': '"',
-			     '&lt;': '<',
-			     '&gt;': '>',
-			     '&amp;': '&',
-			     '&nbsp;': ' '
-			   };
-			   var rhtmlSpace = /\u00a0/g;
-			   var rbr = /<br\s*\/?>/ig;
-			   var rlf = /\r?\n/g;
-			   var rspace = /\s/g;
-			   
-			   var encodeEntities = {};
-			   for (var i in decodeEntities) {
-			    encodeEntities[decodeEntities[i]] = i;
-			   }
-			   
-			   decodeEntities['&apos;'] =  '\''; 
-			   encodeEntities['\''] = '&#39;'; //&apos; (IE不支持)
-			   
-			   function fdecodeEntity(matched,charCode,lastCharCode) {
-			    if (!charCode && !lastCharCode) {
-			     return decodeEntities[matched] || matched;
-			    }
-			    return String.fromCharCode(charCode || lastCharCode);
-			   }
-			   
-			   function fencodeEntity(matched) {
-			    return encodeEntities[matched];
-			   }
-            
-			   return {
-					encode: function(text) {
-				    	return text ? ('' + text).replace(rencodeEntity, fencodeEntity)
-				    			.replace(rlf, '<br/>').replace(rspace, '&nbsp;') : '';
-				    },
-				    decode: function(text) {
-				    	return text ? ('' + text).replace(rbr, '\n')
-				    			.replace(rdecodeEntity, fdecodeEntity).replace(rhtmlSpace, ' ') : '';
-					 }
-			   };
-			}(),
-			cookie: function() {
-		        function encrypt(str) {
-		            if (!str) {
-		                return "";
-		            }
-		            var hash = 5381;
-		            for (var i = 0, len = str.length; i < len; ++i) {
-		                hash += (hash << 5) + str.charAt(i).charCodeAt();
-		            }
-		            return hash & 0x7fffffff;
-		        }
+		   var rdecodeEntity = /&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g;
+		   var rencodeEntity = /['<> "&]/g;
+		   var decodeEntities = {
+		     '&quot;': '"',
+		     '&lt;': '<',
+		     '&gt;': '>',
+		     '&amp;': '&',
+		     '&nbsp;': ' '
+		   };
+		   var rhtmlSpace = /\u00a0/g;
+		   var rbr = /<br\s*\/?>/ig;
+		   var rlf = /\r?\n/g;
+		   var rspace = /\s/g;
+		   
+		   var encodeEntities = {};
+		   for (var i in decodeEntities) {
+		    encodeEntities[decodeEntities[i]] = i;
+		   }
+		   
+		   decodeEntities['&apos;'] =  '\''; 
+		   encodeEntities['\''] = '&#39;'; //&apos; (IE不支持)
+		   
+		   function fdecodeEntity(matched,charCode,lastCharCode) {
+		    if (!charCode && !lastCharCode) {
+		     return decodeEntities[matched] || matched;
+		    }
+		    return String.fromCharCode(charCode || lastCharCode);
+		   }
+		   
+		   function fencodeEntity(matched) {
+		    return encodeEntities[matched];
+		   }
+        
+		   return {
+				encode: function(text) {
+			    	return text ? ('' + text).replace(rencodeEntity, fencodeEntity)
+			    			.replace(rlf, '<br/>').replace(rspace, '&nbsp;') : '';
+			    },
+			    decode: function(text) {
+			    	return text ? ('' + text).replace(rbr, '\n')
+			    			.replace(rdecodeEntity, fdecodeEntity).replace(rhtmlSpace, ' ') : '';
+				 }
+		   };
+		}(),
+		cookie: function() {
+	        function encrypt(str) {
+	            if (!str) {
+	                return "";
+	            }
+	            var hash = 5381;
+	            for (var i = 0, len = str.length; i < len; ++i) {
+	                hash += (hash << 5) + str.charAt(i).charCodeAt();
+	            }
+	            return hash & 0x7fffffff;
+	        }
 
-		        return {
-		            get:function (name) {
-		                if (!name || !document.cookie) {
-		                    return null;
-		                }
-		                var arr = document.cookie.match(new RegExp('(^| )' + encodeURIComponent(name) + '=([^;]*)'));
-		                return arr ? decodeURIComponent(arr[2]) : null;
-		            },
-		            set:function (name, value, domain, path, millisec) {
-		                var cookies = [];
-		                cookies.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
-		                //如果millisec不为null,undefined,false,'',0,其它情况由Date自己处理
-		                if (millisec = parseInt(millisec)) {
-		                    var expire = new Date();
-		                    expire.setTime(expire.getTime() + millisec);
-		                    cookies.push('expires=' + expire.toGMTString());
-		                }
-		                cookies.push('path=' + (path || '/'));
-		                domain && cookies.push('domain=' + domain);
-		                document.cookie = cookies.join(';');
-		            },
-		            remove:function (name, value, domain, path) {
-		                this.set(name, '', domain, path, -Math.abs($.now()));
-		            },
-		            getBkn:function () {
-		                return encrypt($.cookie.getSKey());
-		            },
-		            getSKey: function() {
-		            	return $.cookie.get('skey');
-		            },
-		            getUin:function () {
-		                return parseInt(($.cookie.get('uin') || '').substring(1, uin.length), 10) || 0;
-		            }
-		        };
-		    }(),
-			live: function() {
-				var classes = {}, ids = {}, PRE_LIVE_ATTR = '___imweb_pre_live_';
-				var rclass = /\.([^#.:\s]+)/,  rid = /#([^#.:\s]+)/, rspace = /\s+/g;
-				
-				function parseSelectors(type, selectors, listener, data, bubble) {
-		            if (!selectors || typeof selectors != 'string' || !$.isFunction(listener)) {
-		                return false;
-		            }
-		            var unbinded = !ids[type] && !classes[type];
-		            if (typeof data == 'boolean') {
-		                bubble = data;
-		                data = null;
-		            }
-		            
-		            selectors = selectors.split(',');
-		            for (var i = 0, len = selectors.length; i < len; i++) {
-		                var selector = $.trim(selectors[i]);
-		                var id = selector.match(rid);
-		                if (id) {
-		                	var liveIds = ids[type];
-		                	!liveIds && (ids[type] = liveIds = {});
-		                    liveIds[id[1]] = {listener:listener, data:data, bubble:bubble};
-		                } else {
-		                    var className = selector.match(rclass);
-		                    if (className) {
-		                    	var liveClasses = classes[type];
-		                    	!liveClasses && (classes[type] = liveClasses = {});
-		                        liveClasses[className[1]] = {listener:listener, data:data, bubble:bubble};
-		                    }
-		                }
-		            }
-		            
-		            return unbinded;
-		        }
-				
-				function handleEvent(e) {
-		            execEvents(getEvents(e.type, e.target), e);
-		        }
-				
-				function execEvents(events, e, type) {
-		            for (var i = 0, len = events.length; i < len; i++) {
-		                var event = events[i];
-		                event._event.listener.call(event.target, e,  event._event.data, type);
-		            }
-		        }
-				
-				 function getEvents(type, target) {
-		             var data, className, clazz, list = [], 
-		             liveIds = ids[type], liveClasses = classes[type], 
-		             liveAttr = PRE_LIVE_ATTR + type;
-		             //IE6 ，奇葩
-		             while (target && target.nodeName != 'HTML' && target.getAttribute) {
-		                 if (data = liveIds && liveIds[target.id]) {
-		                     list.push({_event: data, target: target});
-		                     if (!data.bubble) {
-		                         return list;
-		                     }
-		                 } else if (className = target.className) {
-		                     className = className.split(rspace);
-		                     for (var i = 0, len = className.length; i < len; i++) {
-		                         if (data = liveClasses && liveClasses[clazz = className[i]]) {
-		                             list.push({_event: data, target: target});
-		                             if (!data.bubble) {
-		                                 return list;
-		                             }
-		                         }
-		                     }
-		                 }
+	        return {
+	            get:function (name) {
+	                if (!name || !document.cookie) {
+	                    return null;
+	                }
+	                var arr = document.cookie.match(new RegExp('(^| )' + encodeURIComponent(name) + '=([^;]*)'));
+	                return arr ? decodeURIComponent(arr[2]) : null;
+	            },
+	            set:function (name, value, domain, path, millisec) {
+	                var cookies = [];
+	                cookies.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
+	                //如果millisec不为null,undefined,false,'',0,其它情况由Date自己处理
+	                if (millisec = parseInt(millisec)) {
+	                    var expire = new Date();
+	                    expire.setTime(expire.getTime() + millisec);
+	                    cookies.push('expires=' + expire.toGMTString());
+	                }
+	                cookies.push('path=' + (path || '/'));
+	                domain && cookies.push('domain=' + domain);
+	                document.cookie = cookies.join(';');
+	            },
+	            remove:function (name, value, domain, path) {
+	                this.set(name, '', domain, path, -Math.abs($.now()));
+	            },
+	            getBkn:function () {
+	                return encrypt($.cookie.getSKey());
+	            },
+	            getSKey: function() {
+	            	return $.cookie.get('skey');
+	            },
+	            getUin:function () {
+	                return parseInt(($.cookie.get('uin') || '').substring(1, uin.length), 10) || 0;
+	            }
+	        };
+	    }(),
+		live: function() {
+			var classes = {}, ids = {}, PRE_LIVE_ATTR = '___imweb_pre_live_';
+			var rclass = /\.([^#.:\s]+)/,  rid = /#([^#.:\s]+)/, rspace = /\s+/g;
+			
+			function parseSelectors(type, selectors, listener, data, bubble) {
+	            if (!selectors || typeof selectors != 'string' || !$.isFunction(listener)) {
+	                return false;
+	            }
+	            var unbinded = !ids[type] && !classes[type];
+	            if (typeof data == 'boolean') {
+	                bubble = data;
+	                data = null;
+	            }
+	            
+	            selectors = selectors.split(',');
+	            for (var i = 0, len = selectors.length; i < len; i++) {
+	                var selector = $.trim(selectors[i]);
+	                var id = selector.match(rid);
+	                if (id) {
+	                	var liveIds = ids[type];
+	                	!liveIds && (ids[type] = liveIds = {});
+	                    liveIds[id[1]] = {listener:listener, data:data, bubble:bubble};
+	                } else {
+	                    var className = selector.match(rclass);
+	                    if (className) {
+	                    	var liveClasses = classes[type];
+	                    	!liveClasses && (classes[type] = liveClasses = {});
+	                        liveClasses[className[1]] = {listener:listener, data:data, bubble:bubble};
+	                    }
+	                }
+	            }
+	            
+	            return unbinded;
+	        }
+			
+			function handleEvent(e) {
+	            execEvents(getEvents(e.type, e.target), e);
+	        }
+			
+			function execEvents(events, e, type) {
+	            for (var i = 0, len = events.length; i < len; i++) {
+	                var event = events[i];
+	                event._event.listener.call(event.target, e,  event._event.data, type);
+	            }
+	        }
+			
+			 function getEvents(type, target) {
+	             var data, className, clazz, list = [], 
+	             liveIds = ids[type], liveClasses = classes[type], 
+	             liveAttr = PRE_LIVE_ATTR + type;
+	             //IE6 ，奇葩
+	             while (target && target.nodeName != 'HTML' && target.getAttribute) {
+	                 if (data = liveIds && liveIds[target.id]) {
+	                     list.push({_event: data, target: target});
+	                     if (!data.bubble) {
+	                         return list;
+	                     }
+	                 } else if (className = target.className) {
+	                     className = className.split(rspace);
+	                     for (var i = 0, len = className.length; i < len; i++) {
+	                         if (data = liveClasses && liveClasses[clazz = className[i]]) {
+	                             list.push({_event: data, target: target});
+	                             if (!data.bubble) {
+	                                 return list;
+	                             }
+	                         }
+	                     }
+	                 }
 
-		                 target = target.parentNode;
-		             }
+	                 target = target.parentNode;
+	             }
 
-		             return list;
+	             return list;
 
-		         }
+	         }
+			 
+			 function bindDocHover() {
 				 
-				 function bindDocHover() {
-					 
-		             function hover(e) {
-		                 var events = getEvents('hover',e.target), len;
-		                 if (!(len = events.length)) {
-		                     return;
-		                 }
-		                 var type = e.type == 'mouseout' ? 'mouseleave' : 'mouseenter';
-		                 var relatedTarget = e.relatedTarget;
-		                 while (relatedTarget) {
-		                     for (var i = 0, len = events.length; i < len; i++) {
-		                         if (events[i].target == relatedTarget) {
-		                             events.splice(i, len - i);
-		                             execEvents(events, e, type);
-		                             return;
-		                         }
-		                     }
-		                     relatedTarget = relatedTarget.parentNode;
-		                 }
+	             function hover(e) {
+	                 var events = getEvents('hover',e.target), len;
+	                 if (!(len = events.length)) {
+	                     return;
+	                 }
+	                 var type = e.type == 'mouseout' ? 'mouseleave' : 'mouseenter';
+	                 var relatedTarget = e.relatedTarget;
+	                 while (relatedTarget) {
+	                     for (var i = 0, len = events.length; i < len; i++) {
+	                         if (events[i].target == relatedTarget) {
+	                             events.splice(i, len - i);
+	                             execEvents(events, e, type);
+	                             return;
+	                         }
+	                     }
+	                     relatedTarget = relatedTarget.parentNode;
+	                 }
 
-		                 execEvents(events, e, type)
-		             }
+	                 execEvents(events, e, type)
+	             }
 
-		             $(document).bind('mouseover', hover).bind('mouseout', hover);
-		         }
-				
-				return function(selectors, type, listener, data, bubble) {
-					if (parseSelectors(type, selectors, listener, data, bubble)) {
-						type == 'hover' ? bindDocHover() : $(document).bind(type, handleEvent);
-					}
-				};
-			}(),
-			localData : function () {
-				var FILENAME = 'qun.qq.com.feeds';
-				var rkey = /^[0-9A-Za-z_-]*$/, store;
-				
-				function createStore() {
-					var store = document.createElement('link');
-					store.style.display = 'none';
-					store.id = FILENAME;
-					document.getElementsByTagName('head')[0].appendChild(store);
-					store.addBehavior('#default#userdata');
+	             $(document).bind('mouseover', hover).bind('mouseout', hover);
+	         }
+			
+			return function(selectors, type, listener, data, bubble) {
+				if (parseSelectors(type, selectors, listener, data, bubble)) {
+					type == 'hover' ? bindDocHover() : $(document).bind(type, handleEvent);
+				}
+			};
+		}(),
+		localData : function () {
+			var FILENAME = 'qun.qq.com.feeds';
+			var rkey = /^[0-9A-Za-z_-]*$/, store;
+			
+			function createStore() {
+				var store = document.createElement('link');
+				store.style.display = 'none';
+				store.id = FILENAME;
+				document.getElementsByTagName('head')[0].appendChild(store);
+				store.addBehavior('#default#userdata');
+				return store;
+			}
+			
+			function init() {
+				if (store) {
 					return store;
 				}
 				
-				function init() {
-					if (store) {
-						return store;
-					}
-					
-					if (window.localStorage) {
-						return (store = localStorage);
-					}
+				if (window.localStorage) {
+					return (store = localStorage);
+				}
 
-					try {
-						store = createStore();
-						store.load(FILENAME);
-					} catch (e) {}
-					
-					return store;
+				try {
+					store = createStore();
+					store.load(FILENAME);
+				} catch (e) {}
+				
+				return store;
+			}
+			
+			function isValidKey(key) {
+				if (typeof key != 'string') {
+					return false;
 				}
 				
-				function isValidKey(key) {
-					if (typeof key != 'string') {
-						return false;
+				return rkey.test(key);
+			}
+			
+			return {
+				set : function (key, value) {
+					var success = false;
+					if (isValidKey(key) && init()) {
+						try {
+							value += '';
+							if (window.localStorage) {
+								store.setItem(key, value);
+								success = true;
+							} else {
+								store.setAttribute(key, value);
+								store.save(FILENAME);
+								success = store.getAttribute(key) === value;
+							}
+						} catch (e) {}
 					}
 					
-					return rkey.test(key);
-				}
-				
-				return {
-					set : function (key, value) {
-						var success = false;
-						if (isValidKey(key) && init()) {
-							try {
-								value += '';
-								if (window.localStorage) {
-									store.setItem(key, value);
-									success = true;
-								} else {
-									store.setAttribute(key, value);
-									store.save(FILENAME);
-									success = store.getAttribute(key) === value;
-								}
-							} catch (e) {}
-						}
-						
-						return success;
-					},
-					get : function (key) {
-						if (isValidKey(key) && init()) {
-							try {
-								return window.localStorage ? store.getItem(key) : store.getAttribute(key);
-							} catch (e) {}
-						}
-						
-						return null;
-					},
-					remove : function (key) {
-						if (isValidKey(key) && init()) {
-							try {
-								window.localStorage ? store.removeItem(key) : store.removeAttribute(key);
-								return true;
-							} catch (e) {}
-						}
-						return false;
+					return success;
+				},
+				get : function (key) {
+					if (isValidKey(key) && init()) {
+						try {
+							return window.localStorage ? store.getItem(key) : store.getAttribute(key);
+						} catch (e) {}
 					}
-				};
-			}()
+					
+					return null;
+				},
+				remove : function (key) {
+					if (isValidKey(key) && init()) {
+						try {
+							window.localStorage ? store.removeItem(key) : store.removeAttribute(key);
+							return true;
+						} catch (e) {}
+					}
+					return false;
+				}
+			};
+		}(),
+		query:function (name) {
+            var m = window.location.href.match(new RegExp('(\\?|&|#)' + name + '=([^&]+)'));
+            return m ? decodeURIComponent(m[2]) : '';
+        }
 	});
 	
 	$.extend({

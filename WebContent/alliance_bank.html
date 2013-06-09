@@ -13,7 +13,7 @@
 				<div class="logo"></div>
 				<ul class="header_menu" id="headerMenu">
 					<li><a class="special" href="index.html" id="home">首页</a></li>
-					<li><a href="javascript:;" id="introduce">公司介绍</a></li>
+					<li><a href="introduce.html" id="introduce">公司介绍</a></li>
 					<li><a href="warranty.html" id="product">产品中心</a></li>
 					<li><a href="com_news.html" id="news">行业动态</a></li>
 					<li><a href="talents.html" id="resource ">人力资源</a></li>
@@ -55,15 +55,6 @@
 					</div>
 				</div>
 				<div class="detail" id="detail">
-					<ul class="partner_list">
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-						<li><a href="javascript:;"><img src="img/partner.jpg" class="partner_img"></a></li>
-					</ul>
 				</div>
 			</div>
 			<div class="footer">
@@ -77,9 +68,62 @@
 					<a href="alliance_bank.html">战略联盟</a>
 					<a href="address.html">联系我们</a>
 				</div>
-				<div>公司地址：湖北江岸区沿江大道228号江景大厦A座29楼 邮编：430000 tel:(027)8274189982741899 FAX:(027)82741899</div>
+				<div><span id="address"></span>&nbsp;&nbsp;<span id="phone"></span></div>
 				<div>©Copyright:2009-2013 All Rights Reserved.</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript">
+			var startIndex = 0, MAX_NUM = 5000, curPage = 1;
+			var DOWNLOAD_TEMPLATE = '<ul class="partner_list">\
+										<%for (var i = startIndex, len = Math.min(startIndex + MAX_NUM, partner_list.length); i < len; i++) {%>\
+										<li>\
+											<a href="<%=partner_list[i].url%>" title="<%=partner_list[i].title%>" target="_blank"><img src="<%=partner_list[i].thumb%>" class="partner_img"></a>\
+										</li>\
+										<% } %>\
+									</ul>';
+			function fillDetail (list) {
+				$('#detail').html($.tmpl(DOWNLOAD_TEMPLATE, {
+					partner_list : list
+				}));
+			}
+			var _callback = function (data) {
+				data = eval('(' + data + ')');
+				if (data.ec == 0) {
+					var contents = data.ls;
+					var list = [];
+					for (var i = 0, len = contents.length; i < len; i++) {
+						switch (contents[i].type) {
+							case "20":
+								list.push({
+									title : contents[i].title,
+									thumb : contents[i].logo,
+									url : contents[i].content
+								});
+								break;
+							case "25":
+								$('#address').html(contents[i].content);
+								break;
+							case "26":
+								$('#phone').html(contents[i].content);
+								break;
+							default:
+								break;
+						}
+					}
+					
+					fillDetail(list);
+				}
+			};
+			$.ajax({
+				url : 'cgi-servelet/getSourceList',
+				type : 'get',
+				data : { type : "20-25-26", v : new Date() - 0 },
+				success : _callback,
+				error : _callback,
+				dataType: 'text'
+			});
+		</script>
 		</body>
 </html>
