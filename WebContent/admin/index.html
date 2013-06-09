@@ -54,6 +54,11 @@
 			<div class="line"></div>
 			<span class="dataAdd"><a href="javascript:void(0);" onclick="$.showAddEditor(<%= type %>)">新增<%= typeName %></a><span class="addIcon"></span></span>
 			<table class="dataTable1">
+				<col style="width:10%" />
+				<col style="width:30%" />
+				<col style="width:20%" />
+				<col style="width:20%" />
+				<col style="width:20%" />
 				<tr class="tableHead">
 					<td>序号</td>
 					<td>标题</td>
@@ -63,11 +68,11 @@
 				</tr>
 			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
 			   	<tr>
-					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
-					<td style="width:150px"><%= decodeURIComponent(n["title"]) %></td>
-					<td style="width:50px"><%= n["time"] %></td>
-					<td style="width:150px"><img class="news_logo"  src=<%= decodeURIComponent(n["logo"]) %>></td>
-					<td style="width:100px" ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
+					<td ><%= pageSize*(pageNow-1)+i+1 %></td>
+					<td ><%= decodeURIComponent(n["title"]) %></td>
+					<td ><%= n["time"] %></td>
+					<td ><img class="news_logo"  src=<%= decodeURIComponent(n["logo"]) %>></td>
+					<td ><a class="mod_button" href="javascript:void(0);" onclick="$.showAddEditor(<%= n["id"] %>);">编辑</a>&nbsp;&nbsp;<a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
 				</tr>
 			<% } %>
 			</table>
@@ -94,6 +99,10 @@
 			<div class="line"></div>
 			<div class="dataAdd"><a href="javascript:void(0);" onclick="$.showAddEditor(<%= type %>)">新增<%= typeName %></a><span class="addIcon"></span></div>
 			<table class="dataTable1">
+				<col style="width:20%" />
+				<col style="width:40%" />
+				<col style="width:20%" />
+				<col style="width:20%" />
 				<tr class="tableHead">
 					<td>序号</td>
 					<td>表格文件</td>
@@ -102,10 +111,10 @@
 				</tr>
 			<% for(var i=0,l=ls.length;i<l;i++){ var n=ls[i]%>
 			   	<tr>
-					<td style="width:50px"><%= pageSize*(pageNow-1)+i+1 %></td>
-					<td style="width:150px"><a class="biaoge" target="_blank" href="<%= decodeURIComponent(n["logo"]) %>"><%= decodeURIComponent(n["title"]) %></a></td>
-					<td style="width:50px"><%= n["time"] %></td>
-					<td style="width:100px" ><a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
+					<td ><%= pageSize*(pageNow-1)+i+1 %></td>
+					<td ><a class="biaoge" target="_blank" href="<%= decodeURIComponent(n["logo"]) %>"><%= decodeURIComponent(n["title"]) %></a></td>
+					<td ><%= n["time"] %></td>
+					<td  ><a class="del_button" href="javascript:void(0);" onclick="$.delData(<%= n["id"] %>);">删除</a></td>
 				</tr>
 			<% } %>
 			</table>

@@ -86,10 +86,10 @@
 				var fileName=file.substr(file.lastIndexOf("\\")+1);
 				var types=["jpg","jpeg","gif","bmp","png"]
 				if(getType()=="12"){
-					types=["xls","doc"]
+					//types=["xls","doc"]
 					setTitle(fileName);
 				}
-				if(!inArray(types,fileType)){
+				if(!inArray(types,fileType)&&getType()!="12"){
 					alert("文件格式有误,请选择正确的图片格式，支持"+types.join(","));
 					return false;
 				}else{

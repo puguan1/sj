@@ -21,7 +21,7 @@ public class Encoding implements javax.servlet.Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("filter:");
+		//System.out.println("filter:");
 		chain.doFilter(request, response);
 	}
 
