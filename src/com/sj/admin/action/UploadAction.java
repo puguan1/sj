@@ -10,6 +10,10 @@ import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.sj.admin.Context;
@@ -104,7 +108,14 @@ public class UploadAction extends JsonActionSupport {
 			fis.close();
 		}*/
 		copy(file,destFile);
-		return Util.JSON;
+		HttpServletResponse response = ServletActionContext.getResponse();  
+		response.setContentType("text/html;charset=UTF-8");
+		JSONObject jo=new JSONObject();
+		jo.put("ec",0);
+		jo.put("imgId",this.imgId);
+		response.getWriter().print(jo);  
+	    return NONE; 
+		//return Util.JSON;
 	}
 
 	public void setFile(File file) {
