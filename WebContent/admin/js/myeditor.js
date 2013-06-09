@@ -40,13 +40,22 @@
 		var upload = $.upload.init({uploadUrl: '../cgi-bin/upload',
 			placeholderId:'uploadBotton', 
 			placeholderClass:'upload', 
+			title:"上传图片",
 			filePostName: 'file', 
 			disabled: false,
 			postParams: {
 			   'requestAllowedTypes': '1'
 			},
 			uploadStart: function(file) {
-				upload.setDisabled(true);
+				var fileType=file.substr(file.lastIndexOf(".")+1);
+				var fileName=file.substr(file.lastIndexOf("\\")+1);
+				var types=["jpg","jpeg","gif","bmp","png"];
+				if(!inArray(types,fileType)){
+					alert("文件格式有误,请选择正确的图片格式，支持"+types.join(","));
+					return false;
+				}else{
+					upload.setDisabled(true);
+				}
 			},
 			uploadEnd: function() {
 				upload.setDisabled(false);
@@ -70,12 +79,12 @@
 				} catch(e) {
 					//alert(e.message);
 				}
-			},
-			title: 'upload'
+			}
 		});
 		var uploadLogo = $.upload.init({uploadUrl: '../cgi-bin/upload',
 			placeholderId:'uploudLogo', 
 			placeholderClass:'upload', 
+			title:"上传图片",
 			filePostName: 'file', 
 			disabled: false,
 			postParams: {
@@ -120,8 +129,7 @@
 				} catch(e) {
 					//alert(e.message);
 				}
-			},
-			title: 'upload'
+			}
 		});
 	
 	};

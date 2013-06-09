@@ -81,14 +81,15 @@
 			if(m.pid){
 				isLeaf=1;//叶子节点
 			}
-			pDom.append("<div type="+(m.tpye||m.id) +" class='"+(isLeaf==1?"leafMenu":"directoryMenu")+"' isLeaf="+isLeaf+" id="+(menuIdPrefix+m.id)+">"+m.name+"</div>")
+			pDom.append("<div type="+(m.tpye||m.id) +" style='display:"+(isLeaf==1?"none":"")+"'  class='"+(isLeaf==1?"leafMenu":"directoryMenu")+"' isLeaf="+isLeaf+" id="+(menuIdPrefix+m.id)+">"+m.name+"</div>")
 		}
 		addMenuEvents();
 	};
 	var expandMenu=function(menu){
 		//当前为展开，就收拢
+		var speed=500;
 		if(menu.attr("expand")=="1"){
-			menu.children("div").hide();
+			menu.children("div").hide(speed);
 			menu.attr("expand","0")
 		}else{
 			if(menu.attr("hasCreate")=="1"){
@@ -97,7 +98,7 @@
 				createMenu(menu);
 				menu.attr("hasCreate","1")
 			}
-			menu.children("div").show();
+			menu.children("div").show(speed);
 			menu.attr("expand","1")
 		}
 	};
@@ -123,7 +124,19 @@
 				}
 				
 				e.stopPropagation();
-			})
+			});
+/*			menuParent.bind("mouseover",function(e){
+				var menu=$(e.target);
+				if(menu.attr("isLeaf")=="1"){
+				}else{
+					if(menu.attr("hasCreate")=="1"){
+					}else{
+						createMenu(menu);
+						menu.attr("hasCreate","1")
+					}
+				}
+				e.stopPropagation();
+			});*/
 		}
 	};
 	var getMenuNameByType=function(type){
