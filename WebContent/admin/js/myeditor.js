@@ -9,7 +9,7 @@
 			tooltip: "Insert the letter a"
 		});
 		// Replace all textarea's with SCEditor
-		$("textarea").sceditor({
+		$("#editor").sceditor({
 			plugins: "bbcode",
 			locale:"cn",
 			//toolbar: "bold,italic,underline|upload",
@@ -19,7 +19,7 @@
 		    width:780,
 		    height:400
 			 });
-		//$('textarea').sceditor('instance').val('');
+		//$('#editor').sceditor('instance').val('');
 		initUpload();
 
 	};
@@ -61,7 +61,7 @@
 					var imgId=result[3];
 					switch(ec){
 						case "0":
-							$('textarea').sceditor('instance').insert("<img style='max-width:600px;max-height:500px;' src='/sj/uploadImages/"+imgId+"' />");
+							$('#editor').sceditor('instance').insert("<img style='max-width:600px;max-height:500px;' src='/sj/uploadImages/"+imgId+"' />");
 							break;
 						default:
 							alert(result[3]||"图片上传失败");
@@ -136,10 +136,10 @@
 		return $.addSourceType||"1";
 	};
 	var getContent=function(){
-		return $('textarea').sceditor('instance').val();
+		return $('#editor').sceditor('instance').val();
 	};
 	var setContent=function(content){
-		$('textarea').sceditor('instance').val(content);
+		$('#editor').sceditor('instance').val(content);
 	};
 	var getLogo=function(){
 		return $("#logo").val();
@@ -169,7 +169,7 @@
 	};
 	var bindEvent=function(){
 		$("#submit").bind("click",function(){submit();});
-		//$("body").bind("click",function(){$('textarea').sceditor('instance').insert("fuck")});
+		//$("body").bind("click",function(){$('#editor').sceditor('instance').insert("fuck")});
 	};
 	initEditor();
 	bindEvent();

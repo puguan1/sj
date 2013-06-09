@@ -3,6 +3,7 @@ package com.sj.oidb;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +36,7 @@ public class RequestParams {
 	 * 获取post参数
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public Map<String,String> getPostParams(String body){
 		System.out.println(body);
 		Map<String,String> p=new HashMap<String,String>();
@@ -44,7 +46,7 @@ public class RequestParams {
 			pp=params[i].split("=");
 			System.out.println(params[i]);
 			if(pp.length==2){
-				p.put(pp[0],pp[1]);
+				p.put(pp[0],URLDecoder.decode(pp[1]));
 			}
 		}
 		return p;

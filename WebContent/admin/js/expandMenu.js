@@ -117,6 +117,7 @@
 						$.getData(type);
 						$.addSourceType=type;//外面使用
 					}
+					$.editor.clear();
 				}else{
 					expandMenu($(e.target));
 				}

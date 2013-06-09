@@ -54,8 +54,9 @@
 	};
 	var refresh=function(){
 		getData(lastParams.type,lastParams.pageNow,lastParams.pageSize);
-		$.resetEditorType();
 		$.editor.clear();
+		$.resetEditorType();
+		
 	};
 	/**
 	** 删除数据
@@ -100,9 +101,9 @@
 			var title=data.title;
 			var logo=data.logo;
 			var content=data.content;
-			$.editor.setTitle(decodeURIComponent(title));
-			$.editor.setLogo(decodeURIComponent(logo));
-			$.editor.setContent(decodeURIComponent(content));
+			$.editor.setTitle(title);
+			$.editor.setLogo(logo);
+			$.editor.setContent(content);
 			editorType="mod";
 		}else{
 			$.editor.setTitle("");

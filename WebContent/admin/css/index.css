@@ -169,8 +169,11 @@ a.selected { cursor: default; }
 .input{
 	height: 40px
 }
+.textarea{
+	height:60px;
+}
 .titleInput ,.logoInput{
-	width:300px;
+	width:400px;
 	border:1px solid #ccc;
 	background: none;
 }
