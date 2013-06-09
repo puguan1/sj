@@ -3,6 +3,7 @@ package com.sj.oidb;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class RequestParams {
 	 */
 	@SuppressWarnings("deprecation")
 	public Map<String,String> getPostParams(String body){
-		System.out.println(body);
+		//System.out.println(body);
 		Map<String,String> p=new HashMap<String,String>();
 		String [] params=body.split("&");
 		String []pp;
@@ -46,7 +47,13 @@ public class RequestParams {
 			pp=params[i].split("=");
 			System.out.println(params[i]);
 			if(pp.length==2){
-				p.put(pp[0],URLDecoder.decode(pp[1]));
+				try {
+					p.put(pp[0],URLDecoder.decode(pp[1],"utf-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//p.put(pp[0],pp[1]);
 			}
 		}
 		return p;

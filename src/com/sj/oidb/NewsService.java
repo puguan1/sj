@@ -137,6 +137,7 @@ public class NewsService {
 		News result=new News();
 		try{
 			result=nd.findById(id);
+			System.out.print("content:"+result.getContent());
 		}catch(Exception e){
 			
 		}finally{

@@ -3,7 +3,14 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
-
+  <filter>
+  	<filter-name>encoding</filter-name>
+  	<filter-class> com.sj.oidb.Encoding</filter-class> 
+  </filter>
+  <filter-mapping>
+  	<filter-name>encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <description>获取资源列表</description>
     <display-name>getSourceList</display-name>

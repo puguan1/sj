@@ -2,6 +2,7 @@ package com.sj.oidb;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -63,7 +64,7 @@ public class addSource extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");  
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		RequestParams rp=new RequestParams();
@@ -75,6 +76,7 @@ public class addSource extends HttpServlet {
 		n.setContent(bodyParams.get("content"));
 		n.setLogo(bodyParams.get("logo"));
 		n.setType(bodyParams.get("type"));
+		System.out.println("接受倒:"+bodyParams.get("content"));
 		ns.addNews(n);
 		JSONObject jo=new JSONObject();
 		jo.put("ec", 0);
