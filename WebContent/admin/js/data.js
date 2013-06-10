@@ -29,7 +29,7 @@
 			 $("#link_wrap").hide();
 			 $("#resource").html("表格：");
 		//战略联盟
-		}else if(data.type=="25"){
+		}else if(data.type=="26"||data.type=="27"||data.type=="28"||data.type=="29"||data.type=="30"){
 			 t = 'tmpl3';
 			 $("#editor_wrap").hide();
 			  $("#title_wrap").show();
