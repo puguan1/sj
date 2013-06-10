@@ -127,6 +127,7 @@
 						$.addSourceType=type;//外面使用
 					}
 					$.editor.clear();
+					$.resetEditorType();
 				}else{
 					expandMenu($(e.target));
 				}
