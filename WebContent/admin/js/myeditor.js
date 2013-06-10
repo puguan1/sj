@@ -155,9 +155,16 @@
 	var setLogo=function(logo){
 		$("#logo").val(logo);
 	};
+	var getLink=function(){
+		return $("#link").val();
+	};
+	var setLink=function(link){
+		$("#link").val(link);
+	};
 	var clear=function(){
 		setTitle("");
 		setLogo("");
+		setLink("");
 		setContent("");
 	};
 
@@ -167,6 +174,7 @@
 		param.type=getType();
 		param.content=getContent();
 		param.logo=getLogo();
+		param.link=getLink();
 		if($.getEditorType()=="add"){
 			$.addData(param);
 		}else{
@@ -187,9 +195,11 @@
 			setTitle:setTitle,
 			setLogo:setLogo,
 			setContent:setContent,
+			setLink:setLink,
 			getTitle:getTitle,
 			getLogo:getLogo,
 			getContent:getContent,
+			getLink:getLink,
 			clear:clear
 		}
 	}();

@@ -26,13 +26,19 @@
 			 t = 'tmpl2';
 			 $("#editor_wrap").hide();
 			 $("#title_wrap").hide();
+			 $("#link_wrap").hide();
 			 $("#resource").html("表格：");
+		//战略联盟
 		}else if(data.type=="25"){
+			 t = 'tmpl3';
 			 $("#editor_wrap").hide();
-			 $("#titleLabel").html("链接：")
+			  $("#title_wrap").show();
+			 $("#link_wrap").show();
+			 $("#titleLabel").html("描述：")
 		}else{
 			 $("#editor_wrap").show();
 			  $("#title_wrap").show();
+			  $("#link_wrap").hide();
 			 $("#resource").html("图片：");
 			  $("#titleLabel").html("标题：")
 		}
@@ -105,16 +111,16 @@
 		if(data){
 			var title=data.title;
 			var logo=data.logo;
+			var link=data.link;
 			var content=data.content;
 			$.editor.setTitle(title);
 			$.editor.setLogo(logo);
+			$.editor.setLink(link);
 			$.editor.setContent(content);
 			editorType="mod";
 		}else{
-			$.editor.setTitle("");
-			$.editor.setLogo("");
-			$.editor.setContent("");
-			editorType="add";
+			refresh();
+			resetEditorType();
 		}
 		$("#title").focus();
 	};

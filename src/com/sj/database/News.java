@@ -23,8 +23,17 @@ public class News implements java.io.Serializable {
 	private Integer pv;
 	private String writer;
 	private String logo;
+	private String link;
 
 	// Constructors
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
 
 	public String getLogo() {
 		return logo;
@@ -45,7 +54,7 @@ public class News implements java.io.Serializable {
 
 	/** full constructor */
 	public News(String id, String title, String content, String time,
-			String type, Integer pv, String writer,String logo) {
+			String type, Integer pv, String writer,String logo,String link) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -54,6 +63,7 @@ public class News implements java.io.Serializable {
 		this.pv = pv;
 		this.writer = writer;
 		this.logo = logo;
+		this.link=link;
 	}
 
 	// Property accessors
