@@ -4,7 +4,14 @@
 	var menuParent;
 	var lastClick=null;//上次点击的节点
 	var menuData=[
-		{"id":"1","pid":"","name":"公司介绍","type":"1"}
+		 {"id":"34","pid":"","name":"首页","type":"34"}
+
+		,{"id":"25","pid":"34","name":"战略联盟","type":"25"}
+		,{"id":"36","pid":"34","name":"主页banner","type":"36"}
+		,{"id":"37","pid":"34","name":"子页banner","type":"37"}
+		,{"id":"38","pid":"34","name":"引导页banner","type":"38"}
+		
+		,{"id":"1","pid":"","name":"公司介绍","type":"1"}
 
 		,{"id":"2","pid":"1","name":"企业简介","type":"2"}
 		,{"id":"3","pid":"1","name":"核心价值观","type":"3"}
@@ -38,7 +45,7 @@
 		,{"id":"23","pid":"21","name":"经营理念","type":"23"}
 		,{"id":"24","pid":"21","name":"员工风采","type":"24"}
 
-		,{"id":"25","pid":"","name":"战略联盟","type":"25"}
+		//,{"id":"25","pid":"","name":"战略联盟","type":"25"}
 
 		,{"id":"26","pid":"25","name":"合作银行","type":"26"}
 		,{"id":"27","pid":"25","name":"小贷公司","type":"27"}
@@ -50,6 +57,7 @@
 
 		,{"id":"32","pid":"31","name":"公司地址","type":"32"}
 		,{"id":"33","pid":"31","name":"服务电话","type":"33"}
+	
 
 	];
 	var getChildData=function(pid){

@@ -21,15 +21,20 @@
 	};
 	var showData=function(data){
 		var t = 'tmpl1';
+		//表格下载
 		if(data.type=="12"){
 			 t = 'tmpl2';
 			 $("#editor_wrap").hide();
 			 $("#title_wrap").hide();
 			 $("#resource").html("表格：");
+		}else if(data.type=="25"){
+			 $("#editor_wrap").hide();
+			 $("#titleLabel").html("链接：")
 		}else{
 			 $("#editor_wrap").show();
 			  $("#title_wrap").show();
 			 $("#resource").html("图片：");
+			  $("#titleLabel").html("标题：")
 		}
 		$("#showData").html(txTpl(t,data));
 		//console.log(t(data));

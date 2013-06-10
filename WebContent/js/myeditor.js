@@ -22,7 +22,6 @@
 		initUpload();
 
 	};
-	var newsLogo="";
 	var initUpload=function(){
 
 		var uploadBotton=$(".sceditor-toolbar");
@@ -31,10 +30,11 @@
 		var upload = $.upload.init({uploadUrl: '../cgi-bin/upload',
 			placeholderId:'uploadBotton', 
 			placeholderClass:'upload', 
-			filePostName: 'file', 
+			filePostName: 'aaaaaaaa', 
 			disabled: false,
 			postParams: {
-			   'requestAllowedTypes': '1'
+			   'dsssssss': '999999999999999999',
+				m: 1
 			},
 			uploadStart: function(file) {
 				upload.setDisabled(true);
@@ -42,51 +42,8 @@
 			uploadEnd: function() {
 				upload.setDisabled(false);
 				try {
-					var result=this.contentWindow.document.body.innerHTML;
-					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
-					var ec=result[1];
-					var imgId=result[2];
-					switch(ec){
-						case "0":
-							$('textarea').sceditor('instance').insert("<img src='/sj/uploadImages/"+imgId+"' />");
-							break;
-						default:
-							alert("图片上传失败")
-					}
-					
-				} catch(e) {
-					alert(e.message);
-				}
-			},
-			title: 'upload'
-		});
-		var uploadLogo = $.upload.init({uploadUrl: '../cgi-bin/upload',
-			placeholderId:'uploudLogo', 
-			placeholderClass:'upload', 
-			filePostName: 'file', 
-			disabled: false,
-			postParams: {
-			   'requestAllowedTypes': '1'
-			},
-			uploadStart: function(file) {
-				upload.setDisabled(true);
-			},
-			uploadEnd: function() {
-				upload.setDisabled(false);
-				try {
-					var result=this.contentWindow.document.body.innerHTML;
-					result=result.match(/{\"ec\":(\d),\"imgId\":\"([\w .]+)\"}/);
-					var ec=result[1];
-					var imgId=result[2];
-					switch(ec){
-						case "0":
-							newsLogo='/sj/uploadImages/'+imgId;
-							$("#showLogo").html("<img src='/sj/uploadImages/"+imgId+"' />")
-							break;
-						default:
-							alert("图片上传失败")
-					}
-					
+					alert(this.contentWindow.data)
+					//$('textarea').sceditor('instance').insert("<img src='http://6.url.cn/zc/chs/img/ipt.png?v=10030'/>");
 				} catch(e) {
 					alert(e.message);
 				}
@@ -95,16 +52,13 @@
 		});
 	};
 	var getTitle=function(){
-		return encodeURIComponent($("[id=title]").get(0).value);
+		return $("[id=title]").get(0).value;
 	};
 	var getType=function(){
 		return $("[id=type]").get(0).value;
 	};
 	var getContent=function(){
-		return encodeURIComponent($('textarea').sceditor('instance').val());
-	};
-	var getLogo=function(){
-		return newsLogo;
+		return $('textarea').sceditor('instance').val();
 	};
 	var preview=function(){
 		var form=document.createElement("form");
@@ -132,15 +86,10 @@
 		param.title=getTitle();
 		param.type=getType();
 		param.content=getContent();
-		param.logo=getLogo();
-		var submitUrl="../cgi-servelet/addSource";
+		var submitUrl="../cgi-bin/save";
 		$.post(submitUrl,param,function(data){
-				if(data&&data.ec==0){
-					alert("数据添加成功");
-				}else{
-					alert("数据添加失败");
-				}
-		},"json");
+				alert(data);
+		});
 		
 	};
 	var bindEvent=function(){
