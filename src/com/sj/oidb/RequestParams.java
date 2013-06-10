@@ -45,7 +45,7 @@ public class RequestParams {
 		String []pp;
 		for(int i=0;i<params.length;i++){
 			pp=params[i].split("=");
-			System.out.println(params[i]);
+			//System.out.println(params[i]);
 			if(pp.length==2){
 				try {
 					p.put(pp[0],URLDecoder.decode(pp[1],"utf-8"));

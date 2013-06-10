@@ -176,11 +176,16 @@ public class NewsService {
 			if(pageSize!=null&&pageNow!=null){//分页查询
 				int first=(Integer.valueOf(pageNow)-1)*Integer.valueOf(pageSize);
 				q=session.createQuery(hql).setFirstResult(first).setMaxResults(Integer.valueOf(pageSize));
+				result=q.list();
 			}else{
 				q=session.createQuery(hql);
+				result=q.list();
+				for(News n :result){
+					n.setContent("");//不分页的时候去掉内容
+				}
 			}
 			
-			result=q.list();
+			
 		}catch(Exception e){
 			
 		}finally{
