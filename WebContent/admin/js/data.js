@@ -130,7 +130,7 @@
 	var resetEditorType=function(){
 		editorType="add";
 	};
-	getData(defaultType);
+	
 	$.addSourceType=defaultType;
 	$.getData=getData;
 	$.delData=delData;
@@ -139,4 +139,5 @@
 	$.getEditorType=getEditorType;
 	$.resetEditorType=resetEditorType;
 	$.showAddEditor=showAddEditor;
+	getData($.addSourceType);
 })($)
