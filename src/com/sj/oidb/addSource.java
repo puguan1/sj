@@ -76,6 +76,7 @@ public class addSource extends HttpServlet {
 		n.setContent(bodyParams.get("content"));
 		n.setLogo(bodyParams.get("logo"));
 		n.setType(bodyParams.get("type"));
+		n.setLink(bodyParams.get("link"));
 		System.out.println("接受倒:"+bodyParams.get("content"));
 		ns.addNews(n);
 		JSONObject jo=new JSONObject();
