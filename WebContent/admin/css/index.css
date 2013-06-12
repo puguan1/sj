@@ -69,8 +69,7 @@ a.selected { cursor: default; }
 .editor .uploadBotton{
 	width:26px;
 	height:26px;
-	background: none repeat scroll 0 0  #DDDDDD;
-	+background: #DDDDDD;
+	background: url(../img/upload.png) 2px 2px no-repeat  #DDDDDD;
     border-bottom: 1px solid #AAAAAA;
     border-radius: 3px 3px 3px 3px;
    	display: inline-block;

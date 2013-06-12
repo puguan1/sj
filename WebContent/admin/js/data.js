@@ -35,6 +35,11 @@
 			  $("#title_wrap").show();
 			 $("#link_wrap").show();
 			 $("#titleLabel").html("描述：")
+		}else if(data.type=="36"||data.type=="37"||data.type=="38"){
+			t = 'tmpl4';
+			$("#editor_wrap").show();
+			$("#title_wrap").hide();
+			 $("#link_wrap").show();
 		}else{
 			 $("#editor_wrap").show();
 			  $("#title_wrap").show();
