@@ -128,7 +128,7 @@
 								</ul>';
 		var BANNER_TEMPLATE = '<ul class="JQ-slide-content">\
 									<%for(var i = 0, len = bannerList.length; i < len; i++) {%>\
-									<li><img src="<%=bannerList[i].thumb%>" /></li>\
+									<li><a <%=bannerList[i].link ? "href=\'" + (bannerList[i].link.match(/^http:\\/\\//) ? bannerList[i].link : \'http://\' + bannerList[i].link) + "\'" : ""%>><img src="<%=bannerList[i].thumb%>" /></a></li>\
 									<%}%>\
 								</ul>\
 								<ul class="JQ-slide-nav">\
@@ -222,7 +222,8 @@
 				case "36":
 					result.bannerList = result.bannerList || [];
 					result.bannerList.push({
-						thumb : ctn.logo
+						thumb : ctn.logo,
+						link : ctn.link
 					});
 					break;
 				default:

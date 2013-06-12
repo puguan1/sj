@@ -25,7 +25,7 @@ a.selected { cursor: default; }
 .header_menu li a { padding: 0 17px; text-decoration: none; display: inline-block; height: 39px; margin-left: 15px; color: #000; }
 .header_menu li a.selected { cursor: default; background: url(../img/menu_slct.png) 0 0 no-repeat; color: #fff; }
 .header_menu li a:hover { color: #fff; background: url(../img/menu_slct.png) 0 0 no-repeat; }
-.header_menu li a.special { background-position: -15px 0; color: #000; }
+.header_menu li a.special { background-position: -15px 0; }
 
 /** banner css **/
 .banner { height: 295px; overflow: hidden; }
@@ -176,7 +176,7 @@ h3 { line-height: 40px; font-size: 18px; font-weight: bold; text-align: center; 
 .news_content img { margin: 5px 0; }
 .news_content p  { margin: 10px 0; line-height: 20px; text-indent: 2.0em; text-align: left; }
 
-.ref_pager { height: 20px; line-height: 20px; font-size: 13px; font-family: '宋体'; }
+.ref_pager { line-height: 20px; font-size: 13px; font-family: '宋体'; overflow: hidden; }
 .ref_pager .prev_news { color: #666; display: none; }
 .ref_pager .next_news { color: #666; display: none; }
 

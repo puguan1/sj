@@ -64,10 +64,16 @@
 			for (var i = 0, len = contents.length; i < len; i++) {
 				switch (contents[i].type) {
 					case "37":
-						$('#banner img').attr({
+						var img = $('#banner img').attr({
 							'src' : contents[i].logo,
 							'nid' : contents[i].id
 						});
+						if (contents[i].link) {
+							var link = contents[i].link;
+							img.unbind('click').css('cursor', 'pointer').click(function () {
+								window.location.href = link.match(/^http:\/\//) ? link : 'http://' + link;
+							});
+						}
 						break;
 					default:
 						break;

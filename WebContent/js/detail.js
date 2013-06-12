@@ -43,10 +43,16 @@
 				for (var i = 0, len = data.ls.length; i < len; i++) {
 					var content = data.ls[i];
 					if (content.type == '37') {
-						$('#banner img').attr({
+						var img = $('#banner img').attr({
 							'src' : content.logo,
 							'nid' : content.id
 						});
+						if (content.link) {
+							var link = content.link;
+							img.unbind('click').css('cursor', 'pointer').click(function () {
+								window.location.href = link.match(/^http:\/\//) ? link : 'http://' + link;
+							});
+						}
 					} else {
 						$.ajax({
 							url : 'cgi-servelet/getSourceInfo',
@@ -60,7 +66,7 @@
 							},
 							dataType: 'text'
 						});
-					}
+					}	
 				}
 			}
 		},

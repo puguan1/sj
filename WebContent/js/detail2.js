@@ -105,6 +105,28 @@
 			num : list.length
 		}));
 	}
+
+	function getDetails () {
+		var items = $('.com_news_item');
+		for (var i = 0, len = items.length; i < len; i++) {
+			var id = items[i].getAttribute('nid');
+			(function (i) {
+				$.ajax({
+					url : 'cgi-servelet/getSourceInfo',
+					type : 'get',
+					data : { id : id, v : new Date() - 0 },
+					success : function (data) {
+						data = eval('(' + data + ')');
+						if (data.ec == 0 && data.info) {
+							$(items[i]).append(data.info.content);
+						}
+					},
+					dataType: 'text'
+				});
+			})(i);
+		}
+	}
+
 	var callback = function (data) {
 		data = eval('(' + data + ')');
 		if (data.ec == 0) {
@@ -121,10 +143,16 @@
 						});
 						break;
 					case "37":
-						$('#banner img').attr({
+						var img = $('#banner img').attr({
 							'src' : contents[i].logo,
 							'nid' : contents[i].id
 						});
+						if (contents[i].link) {
+							var link = contents[i].link;
+							img.unbind('click').css('cursor', 'pointer').click(function () {
+								window.location.href = link.match(/^http:\/\//) ? link : 'http://' + link;
+							});
+						}
 						break;
 					default:
 						break;
@@ -133,6 +161,7 @@
 			
 			fillDetail(list);
 
+			getDetails();
 
 			params.itemClass && $.live('.' + params.itemClass, 'click', function () {
 				window.location.href = params.detailUrl + "?id=" + $(this).attr('nid');
@@ -145,6 +174,7 @@
 				curPage = 1;
 				startIndex = (curPage - 1) * MAX_NUM;
 				fillDetail(list);
+				getDetails();
 			});
 
 			$.live('.prev_pager', 'click', function () {
@@ -154,6 +184,7 @@
 				curPage--;
 				startIndex = (curPage - 1) * MAX_NUM;
 				fillDetail(list);
+				getDetails();
 			});
 
 			$.live('.next_pager', 'click', function () {
@@ -163,6 +194,7 @@
 				curPage++;
 				startIndex = (curPage - 1) * MAX_NUM;
 				fillDetail(list);
+				getDetails();
 			});
 
 			$.live('.last_pager', 'click', function () {
@@ -172,6 +204,7 @@
 				curPage = Math.ceil(list.length / MAX_NUM);
 				startIndex = (curPage - 1) * MAX_NUM;
 				fillDetail(list);
+				getDetails();
 			});
 			$.live('.number_pager', 'click', function () {
 				if ($(this).hasClass('selected')) {
@@ -180,6 +213,7 @@
 				curPage = $(this).html();
 				startIndex = (curPage - 1) * MAX_NUM;
 				fillDetail(list);
+				getDetails();
 			});
 		}
 	};

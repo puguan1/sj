@@ -45,7 +45,12 @@
 				var callback = function (data) {
 					data = eval('(' + data + ')');
 					if (data.ec == 0 && data.ls) {
-						$('#guideCon').css('background-image', 'url(' + data.ls[0].logo + ')');
+						var guide = $('#guideCon').css('background-image', 'url(' + data.ls[0].logo + ')');
+						if (data.ls[0].link) {
+							guide.css('cursor', 'pointer').click(function () {
+								window.location.href = data.ls[0].link.match(/^http:\/\//) ? data.ls[0].link : 'http://' + data.ls[0].link;
+							});
+						}
 					}
 				};
 				$.ajax({
