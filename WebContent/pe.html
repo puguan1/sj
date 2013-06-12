@@ -22,8 +22,8 @@
 					<li><a href="address.html" id="contact">联系我们</a></li>
 				</ul>
 			</div>
-			<ul class="banner sec_banner">
-				<li class="selected"><img src="img/sec_banner.jpg" /></li>
+			<ul class="banner sec_banner" id="banner">
+				<li class="selected"><img src="" /></li>
 			</ul>
 			<div class="sec_content">
 				<div class="left">
@@ -68,62 +68,12 @@
 					<a href="alliance_bank.html">战略联盟</a>
 					<a href="address.html">联系我们</a>
 				</div>
-				<div><span id="address"></span>&nbsp;&nbsp;<span id="phone"></span></div>
+				<div>公司地址：湖北江岸区沿江大道228号江景大厦A座29楼 邮编:430000 tel:(027)82741899 FAX:(027)82741899</div>
 				<div>©Copyright:2009-2013 All Rights Reserved.</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
-		<script type="text/javascript">
-			var startIndex = 0, MAX_NUM = 5000, curPage = 1;
-			var DOWNLOAD_TEMPLATE = '<ul class="partner_list">\
-										<%for (var i = startIndex, len = Math.min(startIndex + MAX_NUM, partner_list.length); i < len; i++) {%>\
-										<li>\
-											<a href="<%=partner_list[i].url%>" title="<%=partner_list[i].title%>" target="_blank"><img src="<%=partner_list[i].thumb%>" class="partner_img"></a>\
-										</li>\
-										<% } %>\
-									</ul>';
-			function fillDetail (list) {
-				$('#detail').html($.tmpl(DOWNLOAD_TEMPLATE, {
-					partner_list : list
-				}));
-			}
-			var _callback = function (data) {
-				data = eval('(' + data + ')');
-				if (data.ec == 0) {
-					var contents = data.ls;
-					var list = [];
-					for (var i = 0, len = contents.length; i < len; i++) {
-						switch (contents[i].type) {
-							case "24":
-								list.push({
-									title : contents[i].title,
-									thumb : contents[i].logo,
-									url : contents[i].content
-								});
-								break;
-							case "25":
-								$('#address').html(contents[i].content);
-								break;
-							case "26":
-								$('#phone').html(contents[i].content);
-								break;
-							default:
-								break;
-						}
-					}
-					
-					fillDetail(list);
-				}
-			};
-			$.ajax({
-				url : 'cgi-servelet/getSourceList',
-				type : 'get',
-				data : { type : "24-25-26", v : new Date() - 0 },
-				success : _callback,
-				error : _callback,
-				dataType: 'text'
-			});
-		</script>
+		<script type="text/javascript" src="js/detail4.js"></script>
 		</body>
 </html>
