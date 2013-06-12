@@ -22,8 +22,8 @@
 					<li><a href="address.html" id="contact">联系我们</a></li>
 				</ul>
 			</div>
-			<ul class="banner sec_banner">
-				<li class="selected"><img src="img/sec_banner.jpg" /></li>
+			<ul class="banner sec_banner" id="banner">
+				<li class="selected"><img src="" /></li>
 			</ul>
 			<div class="sec_content">
 				<div class="left">
@@ -78,64 +78,12 @@
 					<a href="alliance_bank.html">战略联盟</a>
 					<a href="address.html">联系我们</a>
 				</div>
-				<div><span id="address"></span>&nbsp;&nbsp;<span id="phone"></span></div>
+				<div>公司地址：湖北江岸区沿江大道228号江景大厦A座29楼 邮编:430000 tel:(027)82741899 FAX:(027)82741899</div>
 				<div>©Copyright:2009-2013 All Rights Reserved.</div>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript">
-		var id = parseInt($.query('id')), pid, nid;
-		var idlist = $.cookie.get('indus_news');
-		idlist = idlist.split('-');
-		var index = Array.prototype.indexOf.call(idlist, id + '');
-		if (index > -1) {
-			pid = idlist[index - 1];
-			nid = idlist[index + 1];
-		}
-		function getSourceInfo (id, callback) {
-			$.ajax({
-				url : 'cgi-servelet/getSourceInfo',
-				type : 'get',
-				data : { id : id, v : new Date() - 0 },
-				success : callback,
-				error : callback,
-				dataType: 'text'
-			});
-		}
-
-		getSourceInfo(id, function (data) {
-			data = eval('(' + data + ')');
-			if (data.ec == 0 && data.info) {
-				var info = data.info;
-				$("#detailTitle").html(info.title);
-				$("#newsTime").html(info.time);
-				$("#newsContent").html(info.content);
-			}
-		});
-
-		pid && getSourceInfo(pid, function (data) {
-			data = eval('(' + data + ')');
-			if (data.ec == 0 && data.info) {
-				var info = data.info;
-				$('#prevNews').html('上一篇：' + info.title).attr('nid', info.id).show();
-				$('#prevNews').click(function () {
-					window.location.href = "indus_news_detail.html?id=" + $(this).attr('nid')
-				});
-			}
-		});
-
-		nid && getSourceInfo(nid, function (data) {
-			data = eval('(' + data + ')');
-			if (data.ec == 0 && data.info) {
-				var info = data.info;
-				$('#nextNews').html('下一篇：' + info.title).attr('nid', info.id).show();
-				$('#nextNews').click(function () {
-					window.location.href = "indus_news_detail.html?id=" + $(this).attr('nid')
-				});
-			}
-		});
-		
-	</script>
+	<script type="text/javascript" src="js/detail3.js"></script>
 </html>

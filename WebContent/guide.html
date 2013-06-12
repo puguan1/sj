@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>湖北顺济担保有限公司</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"  />
+	</head>
+	<body>
+		<div class="header guide_header">
+			<div class="logo"></div>
+			<ul class="header_menu" id="headerMenu">
+				<li><a class="special" href="index.html" id="home">首页</a></li>
+				<li><a href="introduce.html" id="introduce">公司介绍</a></li>
+				<li><a href="warranty.html" id="product">产品中心</a></li>
+				<li><a href="com_news.html" id="news">行业动态</a></li>
+				<li><a href="talents.html" id="resource ">人力资源</a></li>
+				<li><a href="com_logo.html" id="culture">企业文化</a></li>
+				<li><a href="alliance_bank.html" id="alliance">战略联盟</a></li>
+				<li><a href="address.html" id="contact">联系我们</a></li>
+			</ul>
+		</div>
+		<div class="guide_con" id="guideCon"></div>	
+		<div class="footer guide_footer">
+			<div>
+				<a href="index.html">首页</a>
+				<a href="introduce.html">公司介绍</a>
+				<a href="warranty.html">产品中心</a>
+				<a href="com_news.html">行业动态</a>
+				<a href="talents.html">人力资源</a>
+				<a href="com_logo.html">企业文化</a>
+				<a href="alliance_bank.html">战略联盟</a>
+				<a href="address.html">联系我们</a>
+			</div>
+			<div>公司地址：湖北江岸区沿江大道228号江景大厦A座29楼 邮编:430000 tel:(027)82741899 FAX:(027)82741899</div>
+			<div>©Copyright:2009-2013 All Rights Reserved.</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.slide.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript">
+			(function () {
+	
+				var callback = function (data) {
+					data = eval('(' + data + ')');
+					if (data.ec == 0 && data.ls) {
+						$('#guideCon').css('background-image', 'url(' + data.ls[0].logo + ')');
+					}
+				};
+				$.ajax({
+					url : 'cgi-servelet/getSourceList',
+					type : 'get',
+					data : { type : '38', v : new Date() - 0 },
+					success : callback,
+					error : callback,
+					dataType: 'text'
+				});
+			})();
+		</script>
+		</body>
+</html>

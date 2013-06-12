@@ -22,8 +22,8 @@
 					<li><a href="address.html" id="contact">联系我们</a></li>
 				</ul>
 			</div>
-			<ul class="banner sec_banner">
-				<li class="selected"><img src="img/sec_banner.jpg" /></li>
+			<ul class="banner sec_banner" id="banner">
+				<li class="selected"><img src="" /></li>
 			</ul>
 			<div class="sec_content">
 				<div class="left">
@@ -66,126 +66,12 @@
 					<a href="alliance_bank.html">战略联盟</a>
 					<a href="address.html">联系我们</a>
 				</div>
-				<div><span id="address"></span>&nbsp;&nbsp;<span id="phone"></span></div>
+				<div>公司地址：湖北江岸区沿江大道228号江景大厦A座29楼 邮编:430000 tel:(027)82741899 FAX:(027)82741899</div>
 				<div>©Copyright:2009-2013 All Rights Reserved.</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/common.js"></script>
-		<script type="text/javascript">
-			var startIndex = 0, MAX_NUM = 5, curPage = 1;
-			var DOWNLOAD_TEMPLATE = '<ul class="indus_news_list">\
-										<%var idlist = []; for (var i = startIndex, len = Math.min(startIndex + MAX_NUM, indus_news_list.length); i < len; i++) {idlist.push(indus_news_list[i].id);%>\
-										<li>\
-											<a class="indus_news_item ellipsis" nid="<%=indus_news_list[i].id%>" href="javascript:;"><%=indus_news_list[i].title%></a>\
-											<span class="indus_news_time"><%=indus_news_list[i].time%></span>\
-										</li>\
-										<% } $.cookie.set("staff_news", idlist.join("-")); %>\
-									</ul>';
-			var PAGER_TEMPLATE = '<% var pages = Math.ceil(num / MAX_NUM); \
-									if (pages > 1) {%>\
-									<div class="pager">\
-										<a href="javascript:;" class="first_pager <%=curPage == 1 ? \'first_pager_dis\' : \'\'%>" id="firstPager" title="第一页"></a>\
-										<a href="javascript:;" class="prev_pager <%=curPage == 1 ? \'prev_pager_dis\' : \'\'%>" id="prevPager" title="上一页"></a>\
-										<% for (var i = Math.min(curPage, pages - 9 <= 1 ? 1 : pages - 9), len = Math.min(9 + curPage, pages); i <= len; i++) {%>\
-										<a href="javascript:;" class="number_pager <%=curPage == i ? \'selected\' : \'\'%>"><%=i%></a>\
-										<% } %>\
-										<a href="javascript:;" class="next_pager <%=curPage == pages ? \'next_pager_dis\' : \'\'%>" id="nextPager" title="下一页"></a>\
-										<a href="javascript:;" class="last_pager <%=curPage == pages ? \'last_pager_dis\' : \'\'%>" id="lastPager" title="最后一页"></a>\
-									</div>\
-								<%}%>';
-			function fillDetail (list) {
-				$('#detail').html($.tmpl(DOWNLOAD_TEMPLATE, {
-					indus_news_list : list
-				}) + $.tmpl(PAGER_TEMPLATE, {
-					num : list.length
-				}));
-			}
-			var _callback = function (data) {
-				data = eval('(' + data + ')');
-				if (data.ec == 0) {
-					var contents = data.ls;
-					var list = [];
-					for (var i = 0, len = contents.length; i < len; i++) {
-						switch (contents[i].type) {
-							case "19":
-								list.push({
-									id : contents[i].id,
-									title : contents[i].title,
-									time : contents[i].time
-								});
-								break;
-							case "25":
-								$('#address').html(contents[i].content);
-								break;
-							case "26":
-								$('#phone').html(contents[i].content);
-								break;
-							default:
-								break;
-						}
-					}
-					
-					fillDetail(list);
-	
-	
-					$.live('.indus_news_item', 'click', function () {
-						window.location.href = "staff_detail.html?id=" + $(this).attr('nid');
-					});
-	
-					$.live('.first_pager', 'click', function () {
-						if ($(this).hasClass('first_pager_dis')) {
-							return;
-						}
-						curPage = 1;
-						startIndex = (curPage - 1) * MAX_NUM;
-						fillDetail(list);
-					});
-	
-					$.live('.prev_pager', 'click', function () {
-						if ($(this).hasClass('prev_pager_dis')) {
-							return;
-						}
-						curPage--;
-						startIndex = (curPage - 1) * MAX_NUM;
-						fillDetail(list);
-					});
-	
-					$.live('.next_pager', 'click', function () {
-						if ($(this).hasClass('next_pager_dis')) {
-							return;
-						}
-						curPage++;
-						startIndex = (curPage - 1) * MAX_NUM;
-						fillDetail(list);
-					});
-	
-					$.live('.last_pager', 'click', function () {
-						if ($(this).hasClass('last_pager_dis')) {
-							return;
-						}
-						curPage = Math.ceil(list.length / MAX_NUM);
-						startIndex = (curPage - 1) * MAX_NUM;
-						fillDetail(list);
-					});
-					$.live('.number_pager', 'click', function () {
-						if ($(this).hasClass('selected')) {
-							return;
-						}
-						curPage = $(this).html();
-						startIndex = (curPage - 1) * MAX_NUM;
-						fillDetail(list);
-					});
-				}
-			};
-			$.ajax({
-				url : 'cgi-servelet/getSourceList',
-				type : 'get',
-				data : { type : "19-25-26", v : new Date() - 0 },
-				success : _callback,
-				error : _callback,
-				dataType: 'text'
-			});
-		</script>
+		<script type="text/javascript" src="js/detail2.js"></script>
 		</body>
 </html>
