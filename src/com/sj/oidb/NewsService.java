@@ -184,8 +184,7 @@ public class NewsService {
 					n.setContent("");//不分页的时候去掉内容
 				}
 			}
-			
-			
+			tx.commit();			
 		}catch(Exception e){
 			
 		}finally{
@@ -221,6 +220,7 @@ public class NewsService {
 			}
 			Query q=session.createQuery(hql);
 			result=q.list();
+			tx.commit();	
 		}catch(Exception e){
 			
 		}finally{
