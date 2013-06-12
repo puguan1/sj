@@ -29,7 +29,17 @@
 	var id = parseInt($.query('id')), pid, nid;
 	var idlist = $.cookie.get(params.cookiename);
 	idlist = idlist.split('-');
-	var index = Array.prototype.indexOf.call(idlist, id + '');
+	var index = -1;
+	if (Array.prototype.indexOf) {
+		index = Array.prototype.indexOf.call(idlist, id + '');
+	} else {
+		for (var i = 0, len = idlist.length; i < len; i++) {
+			if (idlist[i] == id) {
+				index = i;
+				break;
+			}
+		}
+	}
 	if (index > -1) {
 		pid = idlist[index - 1];
 		nid = idlist[index + 1];

@@ -245,8 +245,6 @@
 				$('#slide').html($.tmpl(BANNER_TEMPLATE, result));
 				$('#content').html($.tmpl(HTML_CONTENT_TEMPLATE, result));
 				$('#partner').append($.tmpl(PARTNER_TEMPLATE, result));
-				$('#address').html(result.address);
-				$('#phone').html(result.phone);
 				getDetail(result.com_news[0].id);
 				addEvents();
 			};
@@ -270,7 +268,7 @@
 			$.ajax({
 				url : 'cgi-servelet/getSourceInfo',
 				type : 'get',
-				data : { id : id },
+				data : { id : id, v : new  Date() - 0 },
 				success : callback,
 				error : callback,
 				dataType: 'text'
@@ -307,7 +305,7 @@
 				var index = indexOfNews($('#comNewsCon').attr('nid'));
 				var news = result.com_news[index - 1];
 				$('#comNewsCon').attr('nid', news.id);
-				$('#comNewsThumb').html(news.thumb);
+				$('#comNewsThumb').attr('src', news.thumb);
 				$('#comNewsTitle').html(news.title);
 				getDetail(news.id);
 				if (index == 1) {
@@ -320,7 +318,7 @@
 				var index = indexOfNews($('#comNewsCon').attr('nid'));
 				var news = result.com_news[index + 1];
 				$('#comNewsCon').attr('nid', news.id);
-				$('#comNewsThumb').html(news.thumb);
+				$('#comNewsThumb').attr('src', news.thumb);
 				$('#comNewsTitle').html(news.title);
 				getDetail(news.id);
 				if (index == result.com_news.length - 2) {
