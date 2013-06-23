@@ -15,7 +15,7 @@
 
   <servlet-mapping>
     <servlet-name>getSourceList</servlet-name>
-    <url-pattern>/cgi-bin/getSourceList</url-pattern>
+    <url-pattern>/cgi-servelet/getSourceList</url-pattern>
   </servlet-mapping>
 	<filter>
 		<filter-name>characterEncoding</filter-name>
