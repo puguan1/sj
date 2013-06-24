@@ -135,12 +135,17 @@ public class NewsService {
 	public News getNewsById(String id){
 		NewsDAO nd=new NewsDAO();
 		News result=new News();
+		Session session=HibernateSessionFactory.getSession();
+		Transaction tx=null; 
 		try{
+			tx=session.beginTransaction();
 			result=nd.findById(id);
-			System.out.print("content:"+result.getContent());
+			System.out.println("content:"+result.getContent());
+			tx.commit();
 		}catch(Exception e){
 			
 		}finally{
+			session.close();
 			return result;
 		}
 		
@@ -180,9 +185,7 @@ public class NewsService {
 			}else{
 				q=session.createQuery(hql);
 				result=q.list();
-				for(News n :result){
-					n.setContent("");//不分页的时候去掉内容
-				}
+				
 			}
 			tx.commit();			
 		}catch(Exception e){
@@ -190,6 +193,14 @@ public class NewsService {
 		}finally{
 			session.close();
 		}
+		if(pageSize!=null&&pageNow!=null){//分页查询
+			
+		}else{
+			for(News n :result){
+				n.setContent("");//不分页的时候去掉内容
+			}
+		}
+
 		return result;
 		
 	}
