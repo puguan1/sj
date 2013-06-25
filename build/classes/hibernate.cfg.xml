@@ -19,9 +19,12 @@
 	    <property name="hibernate.c3p0.min_size">5</property>  
 	    <property name="hibernate.c3p0.max_size">20</property>  
 	    <property name="hibernate.c3p0.timeout">1800</property>  
-	    <property name="hibernate.c3p0.max_statements">50</property>  
+	    <property name="hibernate.c3p0.max_statements">300</property>  
 	    <!-- 下面这句很重要，后面有解释 -->  
 	    <property name="hibernate.c3p0.testConnectionOnCheckout">true</property> 
+	    <property name="hibernate.c3p0.acquireRetryAttempts">-1</property>
+		<property name="hibernate.c3p0.acquireRetryDelay">10</property>
+	    
 		<property name="hbm2ddl.auto">update</property>
 		<!--指定连接的语言-->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
