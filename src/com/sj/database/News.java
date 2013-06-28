@@ -65,6 +65,18 @@ public class News implements java.io.Serializable {
 		this.logo = logo;
 		this.link=link;
 	}
+	/**  constructor without content */
+	public News(String id, String title, String time,
+			String type, Integer pv, String writer,String logo,String link) {
+		this.id = id;
+		this.title = title;
+		this.time = time;
+		this.type = type;
+		this.pv = pv;
+		this.writer = writer;
+		this.logo = logo;
+		this.link=link;
+	}
 
 	// Property accessors
 	@Id

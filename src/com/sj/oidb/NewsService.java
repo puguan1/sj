@@ -169,23 +169,31 @@ public class NewsService {
 		Transaction tx=null; 
 		try{
 			tx=session.beginTransaction();
-			String hql="from News n where ";
-			for(int i=0;i<typeArray.length;i++){
-				if(i==0){
-					hql+=" n.type="+typeArray[i];
-				}else{
-					hql+=" or n.type="+typeArray[i];
-				}
-			}
+			String hql="";
 			Query q;
 			if(pageSize!=null&&pageNow!=null){//分页查询
+				 hql="from News n where ";
+				for(int i=0;i<typeArray.length;i++){
+					if(i==0){
+						hql+=" n.type="+typeArray[i];
+					}else{
+						hql+=" or n.type="+typeArray[i];
+					}
+				}
 				int first=(Integer.valueOf(pageNow)-1)*Integer.valueOf(pageSize);
 				q=session.createQuery(hql).setFirstResult(first).setMaxResults(Integer.valueOf(pageSize));
 				result=q.list();
 			}else{
+				hql="select new News(id,title,time,type,pv,writer,logo,link) from News n where ";
+				for(int i=0;i<typeArray.length;i++){
+					if(i==0){
+						hql+=" n.type="+typeArray[i];
+					}else{
+						hql+=" or n.type="+typeArray[i];
+					}
+				}
 				q=session.createQuery(hql);
-				result=q.list();
-				
+				result=q.list();	
 			}
 			tx.commit();			
 		}catch(Exception e){
@@ -193,14 +201,6 @@ public class NewsService {
 		}finally{
 			session.close();
 		}
-		if(pageSize!=null&&pageNow!=null){//分页查询
-			
-		}else{
-			for(News n :result){
-				n.setContent("");//不分页的时候去掉内容
-			}
-		}
-
 		return result;
 		
 	}
